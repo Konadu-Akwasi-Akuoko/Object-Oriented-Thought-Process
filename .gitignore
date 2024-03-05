@@ -50,6 +50,7 @@ build/
 .mtj.tmp/
 
 # Package Files #
+!./plantuml-1.2024.3.jar
 *.jar
 *.war
 *.nar

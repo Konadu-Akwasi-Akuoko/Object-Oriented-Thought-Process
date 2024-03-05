@@ -1,0 +1,18 @@
+@startuml
+class Employee {
+  -socialSecurityNumber: String
+  -gender: boolean
+  -dateOfBirth: Date
+  +getSocialSecurityNumber(): String
+  +getGender(): boolean
+  +getDateOfBirth(): Date
+  +setSocialSecurityNumber(): void
+  +setGender(): void
+  +setDateOfBirth(): void
+}
+
+class Payroll {
+  -pay: double
+  +calculatePay(): double
+}
+@enduml

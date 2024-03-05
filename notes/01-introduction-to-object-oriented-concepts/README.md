@@ -130,23 +130,4 @@ So let's say we have a `Payroll` object which contains a method called Calculate
 
 The below diagram is a class diagram representing the Employee/Payroll system we have been talking about.
 
-```plantuml
-@startuml
-class Employee {
-  -socialSecurityNumber: String
-  -gender: boolean
-  -dateOfBirth: Date
-  +getSocialSecurityNumber(): String
-  +getGender(): boolean
-  +getDateOfBirth(): Date
-  +setSocialSecurityNumber(): void
-  +setGender(): void
-  +setDateOfBirth(): void
-}
-
-class Payroll {
-  -pay: double
-  +calculatePay(): double
-}
-@enduml
-```
+![A UML diagram of the class representing Employee and Payroll classes](/uml/chapter_one/employee-payroll.png)
