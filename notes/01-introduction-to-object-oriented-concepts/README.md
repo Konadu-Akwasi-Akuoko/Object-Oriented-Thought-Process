@@ -131,3 +131,13 @@ So let's say we have a `Payroll` object which contains a method called Calculate
 The below diagram is a class diagram representing the Employee/Payroll system we have been talking about.
 
 ![A UML diagram of the class representing Employee and Payroll classes](/uml/chapter_one/employee-payroll.png)
+
+Each class diagram is defined by three separate sections: the name itself, the data (attributes), and the behaviors (methods). For example the Employee class diagram’s attribute section contains `SocialSecurityNumber`, `Gender`, and `dateOfBirth`, whereas the method section contains the methods that operate on these attributes.
+
+From this we can basically say that classes are templates from which objects are made.
+
+When an object is created, we say that the objects are instantiated. Thus, if we create three employees, we are actually creating three totally distinct instances of an Employee class. Each object contains its own copy of the attributes and methods.
+
+> **An Implementation Issue** - Be aware that there is not necessarily a physical copy of each method for each object. Rather, each object points to the same implementation. However, this is an issue left up to the compiler/operating platform. From a conceptual level, you can think of objects as being wholly independent and having their own attributes and methods.
+
+## What exactly is a class?
