@@ -2,7 +2,7 @@ package com.example.chapter_one;
 
 public class Employee {
 
-    private String name;
+    private String name = "John Doe";
     private String socialSecurityNumber;
     private String dateOfBirth;
     private String phoneNumber;
@@ -13,6 +13,10 @@ public class Employee {
 
     public String getSocialSecurityNumber() {
         return socialSecurityNumber;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

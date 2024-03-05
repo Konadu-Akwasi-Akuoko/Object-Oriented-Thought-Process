@@ -141,3 +141,128 @@ When an object is created, we say that the objects are instantiated. Thus, if we
 > **An Implementation Issue** - Be aware that there is not necessarily a physical copy of each method for each object. Rather, each object points to the same implementation. However, this is an issue left up to the compiler/operating platform. From a conceptual level, you can think of objects as being wholly independent and having their own attributes and methods.
 
 ## What exactly is a class?
+
+A class is a blueprint for an object. When you instantiate an object, you use a class as the basis for how the object is built. It is difficult to describe a class without using the term object and vice versa. For example, a specific individual bike is an object. However, someone had to have created the blueprints (that is, the class) to build the bike. In OO concepts the class comes first, then the objects use the class as a blueprint.
+
+The following sections describe some of the fundamental concepts of classes and how they interact.
+
+### Creating objects
+
+Classes can be thought of as the templates for objects. A class is used to create an object.
+
+When you create objects, each object has its own attributes (data) and behaviors (functions or routines). A class defines the attributes and behaviors that all objects created with this class will possess. Classes are pieces of code. Objects instantiated(created) from classes can be distributed individually or as part of a library. Because objects are created from classes, it follows that classes must define the basic building blocks of objects (attributes, behavior, and messages). In short, you must design a class before you can create an object.
+
+```java
+// Here we define a class called ClassToObject. This is the main entry point of our java file, which contains our main method.
+public class ClassToObject {
+
+    // Here we define a static inner class called Employee. This class is also a template for creating objects.
+    public static class Employee {
+
+        // These are the attributes of the Employee class. Each object created from this class will have these attributes.
+        private String name = "John Doe";
+        private String socialSecurityNumber;
+        private String dateOfBirth;
+        private String phoneNumber;
+
+        // This is a behavior of the Employee class. It allows us to set the value of the socialSecurityNumber attribute.
+        public void setSocialSecurityNumber(String socialSecurityNumber) {
+            this.socialSecurityNumber = socialSecurityNumber;
+        }
+
+        // This is another behavior of the Employee class. It allows us to get the value of the socialSecurityNumber attribute.
+        public String getSocialSecurityNumber() {
+            return socialSecurityNumber;
+        }
+
+        // This is another behavior of the Employee class. It allows us to get the value of the name attribute.
+        public String getName() {
+            return name;
+        }
+
+    }
+
+    // This is the main method where the program starts. Here we create an object of the Employee class.
+    public static void main(String[] args) {
+
+        // Here we create an object of the Employee class. This object has its own attributes and behaviors as defined by the Employee class.
+        Employee employee = new Employee();
+
+        // Here we use the getName behavior of the employee object to get the value of the name attribute and print it.
+        System.err.println(employee.getName());
+
+    }
+
+}
+```
+
+The following is also an example of a `Person` class, that will be a blueprint for a `Person` object.:
+
+```java
+public class Person {
+
+    // Attributes
+    private String name;
+    private String address;
+
+    // Methods
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String adr) {
+        address = adr;
+    }
+
+}
+```
+
+### Attributes
+
+The data of a class is represented by `attributes`. Each class must define the attributes that will store the state of each object instantiated from that class. In the `Person` class example, the `Person` class defines attributes for `name` and `address`.
+
+> **Access Designations** - When a data type or method is defined as *public*, other objects can directly access it. When a data type or method is defined as *private*, only that specific object can access it. Another access modifier, *protected*, allows access by related objects.
+
+### Methods
+
+Methods implement the required behavior of a class. Every object instantiated from this class includes methods as defined by the class. Methods may implement behaviors that are called from other objects (messages) or provide the fundamental, internal behavior of the class. **Internal behaviors are private methods** that are not accessible by other objects. Here is an example of a private method:
+
+```java
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.setName("John Doe");
+        person.printName();
+    }
+```
+
+In the Person class, the behaviors are `getName()`, `setName()`, `getAddress()`, and `setAddress()`. These methods allow other objects to inspect and change the values of the object’s attributes. This is a common technique in OO systems. In all cases, access to attributes within an object should be controlled by the object itself—no other object should directly change an attribute of another.
+
+## Messages
+
+Messages are the communication mechanism between objects. For example, when Object A invokes a method of Object B, Object A is sending a message to Object B. Object B’s response is defined by its return value. Only the public methods, not the private methods, of an object can be invoked by another object. The below code demonstrates this concept.
+
+```java
+public class Payroll {
+
+    public Payroll() {
+        String name;
+        // Instantiate a new Person object
+        Person person = new Person();
+        // Call the public method setName() on the person object
+        person.setName("John Doe");
+        name = person.getName();
+
+        System.out.println(name);
+    }
+}
+```
+
+In this example (assuming that a `Payroll` object is instantiated), the Payroll object is sending a message to a `Person` object, with the purpose of setting the name via `setName` and also retrieving the name via the `getName()` method.
