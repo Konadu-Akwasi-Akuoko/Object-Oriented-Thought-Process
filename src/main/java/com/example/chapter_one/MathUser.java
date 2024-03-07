@@ -1,6 +1,6 @@
 package com.example.chapter_one;
 
-public class Math {
+public class MathUser {
 
     private int myInt1 = 1;
     private int myInt2 = 2;

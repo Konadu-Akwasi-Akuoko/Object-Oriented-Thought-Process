@@ -245,7 +245,7 @@ Methods implement the required behavior of a class. Every object instantiated fr
 
 In the Person class, the behaviors are `getName()`, `setName()`, `getAddress()`, and `setAddress()`. These methods allow other objects to inspect and change the values of the object’s attributes. This is a common technique in OO systems. In all cases, access to attributes within an object should be controlled by the object itself—no other object should directly change an attribute of another.
 
-## Messages
+### Messages
 
 Messages are the communication mechanism between objects. For example, when Object A invokes a method of Object B, Object A is sending a message to Object B. Object B’s response is defined by its return value. Only the public methods, not the private methods, of an object can be invoked by another object. The below code demonstrates this concept.
 
@@ -266,3 +266,193 @@ public class Payroll {
 ```
 
 In this example (assuming that a `Payroll` object is instantiated), the Payroll object is sending a message to a `Person` object, with the purpose of setting the name via `setName` and also retrieving the name via the `getName()` method.
+
+## Encapsulation and data hiding
+
+One of the primary advantages of using objects is that the object need not reveal all its attributes and behaviors. In good OO design, an object should reveal only the interfaces that other objects must have to interact with it. Details not pertinent to the use of the object should be hidden from all other objects—basically a “need to know” basis.
+
+In the context of Object-Oriented (OO) design, an interface typically refers to the methods or functions that an object exposes to other objects for interaction. These methods define the ways in which other objects can interact with the given object. The attributes (or properties) of an object are usually kept private and are accessed or modified through these methods. This is a part of the encapsulation principle in OO design, which is all about hiding the internal details of how an object works and only exposing a public interface.
+
+Encapsulation is defined by the fact that objects contain both the attributes and behaviors. Data hiding is a major part of encapsulation.
+
+For example, an object that calculates the square of a number must provide an interface to obtain the result. However, the internal attributes and algorithms used to calculate the square need not be made available to the requesting object. Robust classes are designed with encapsulation in mind. Check out the example below:
+
+```java
+public class SquareOfNumber {
+
+    private int number;
+    
+
+    SquareOfNumber(int number) {
+        this.number = number;
+    }
+
+    public int calculateSquare() {
+        int result;
+        result = number * number;
+        return result;
+    }
+
+}
+
+// Inside a Main.java file where this will be called
+    public static void main(String[] args) {
+        SquareOfNumber squareOfNumber = new SquareOfNumber(7);
+        System.err.println("The square of 7 is " + squareOfNumber.calculateSquare());
+    }
+```
+
+### Interfaces
+
+Interface defines the fundamental means of communication between objects. How does interfaces work?
+
+1. **Each class design specifies the interfaces for the proper instantiation and operation of objects.** This means that when you design a class, you define the methods (interfaces) that can be used to create (instantiate) and manipulate (operate) objects of that class.
+2. **Any behavior that the object provides must be invoked by a message sent using one of the provided interfaces.** This means that any action that an object can perform is done through one of its methods. In OOP, we often say that we "send a message" to an object when we call one of its methods.
+3. **The interface should completely describe how users of the class interact with the class.** This means that the methods of a class should provide all the necessary functionality for someone using the class. If the class is well-designed, a user should be able to do everything they need to do just by calling the class's methods.
+4. **In most OO languages, the methods that are part of the interface are designated as public.** This Fmeans that the methods which are intended for users of the class to call are usually marked as `public`. In Java and many other OOP languages, `public` methods are accessible from outside the class, while `private` methods are only accessible from within the class.
+
+> **Private Data:** For data hiding to work properly, all attributes should be declared as private. Thus, attributes are never part of the interface. Only the public methods are part of the class interface. Declaring an attribute as public breaks the concept of data hiding.
+
+Thus if a user or object needs access to an attribute, a method is created to return the value of the attribute (a getter). If a user then wants to obtain the value of an attribute, a method is called on the instantiated object to return its value. In this way, the object that contains the attribute controls access to it. This is of vital importance, especially in security, testing, and maintenance.If you control the access to the attribute, when a problem arises, you do not have to worry about tracking down every piece of code that might have changed the attribute—it can be changed in only one place (the setter).
+
+> **The keyword `interface` vs interface of a class:** In languages like Java, an `interface` is a type that contains no implementation, but only declarations of methods (and possibly constants). Classes can implement these interfaces, which means they provide the implementation for all the methods declared in the interface. But in this context  the “interface” of a class refers to the methods that the class exposes to the outside world, i.e., how other classes and objects interact with it. This includes all the public methods and properties. This is sometimes also referred to as the class’s “public interface”.
+
+### Implementations
+
+Only the public attributes and methods are considered the interface. The user should not see any part of the internal implementation, interacting with an object solely through class interfaces. Thus, anything defined as private is inaccessible to the user and considered part of the class’s internal implementation.
+
+For example the `Employee` class below, shows that only the attributes are hidden. In many cases, there will be methods that also should be hidden and thus not part of the interface.
+
+```Java
+public class Employee {
+
+    private String name;
+    private String socialSecurityNumber;
+    private String dateOfBirth;
+    private String phoneNumber;
+
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+}
+```
+
+Continuing the example of the square root from the previous section, the user does not care how the square root is calculated—as long as it is the correct answer. Thus, the implementation can change, and it will not affect the user’s code. For example, the company that produces the calculator can change the algorithm (perhaps because it is more efficient) without affecting the result.
+
+Let's use a real-world example to explain the concept of Implementations and Interfaces:
+
+> Imagine you’re at a restaurant. The menu you’re given is like an interface. It lists all the dishes (methods) that the restaurant (class) can prepare for you. You don’t need to know how each dish is prepared (implementation), you just need to know what dishes (methods) you can order. Now, let’s say you order a pasta dish. The waiter takes your order and brings it to the kitchen. The chef (implementation) prepares the pasta according to the recipe (method logic). The waiter then brings the prepared dish (method result) back to you. In this scenario, you (the user of the class) don’t need to know how the kitchen works or how the chef (implementation) prepares the dish (method). You just need to know what you can order (methods in the interface) from the menu (interface). The restaurant can change chefs (implementations), and as long as they still follow the recipes (methods), you’ll get the dish you expect. This is the power of interfaces: they allow you to use a class without needing to understand its internal workings, and they allow the class to change its internal workings without affecting its users.
+
+Now let's see how we can implement this in the real world using the `Square` class
+
+```Java
+public class SquareOfNumber {
+    // private attribute
+    private int squareValue;
+
+    // public interface
+    public int getSquare(int value) {
+        squareValue = calculateSquare(value);
+        return squareValue;
+    }
+
+    // private implementation
+    private int calculateSquare(int value) {
+        return value * value;
+    }
+}
+```
+
+Note that the only part of the class that the user has access to is the public method `getSquare`, which is the interface. The implementation of the square algorithm is in the method `calculateSquare`, which is private. Also notice that the attribute `SquareValue` is private because users do not need to know that this attribute exists. Therefore, we have hidden the part of the implementation: The object reveals only the interfaces the user needs to interact with it, and details that are not pertinent to the use of the object are hidden from other objects. If the implementation were to change—suppose you wanted to use the language’s built-in square function—you would not need to change the interface, just the implementation.
+
+Here the code uses the Java library method Math.pow, which performs the same function, but note that the interface is still `calculateSquare`.
+
+```java
+    // private implementation changed without affecting users of the object
+    private int calculateSquare(int value) {
+        return (int) Math.pow(value, 2);
+    }
+```
+
+The user would get the same functionality using the same interface, but the implementation would have changed.
+
+## Inheritance
+
+Inheritance enables a class to inherit the attributes and methods of another class. This provides the ability to create new classes by abstracting out or getting common attributes and behaviors(methods) from another class.
+
+One of the major design issues in OO programming is to factor out commonality of the various classes. For example, suppose you have a Dog class and a Cat class, and each will have an attribute for eye color. In a procedural model, the code for Dog and Cat would each contain this attribute. In an OO design, the color attribute could be moved up to a class called Mammal—along with any other common attributes and methods. In this case, both Dog and Cat inherit from the Mammal class, as shown in the below figure.
+
+![Dog and cat inheriting from the mammal class](/uml/chapter_one/cat-and-dog-inheriting-mammal.png)
+
+The Dog and Cat classes both inherit from Mammal. This means that a Dog class has the following attributes:
+
+- `eyeColor // inherited from Mammal`
+- `barkFrequency // defined only for Dogs`
+
+In the same vein, the Dog object has the following methods:
+
+- `getEyeColor // inherited from Mammal`
+- `bark // defined only for Dogs`
+
+When the Dog or the Cat object is instantiated, it contains everything in its own class, as well as everything from the parent class. Thus, Dog has all the properties of its class definition, as well as the properties inherited from the Mammal class.
+
+So in code, this is how it will be:
+
+First create your Mammal class. thus the parent class.
+
+```java
+public class Mammal {
+
+    private int eyeColor;
+
+    public int getEyeColor() {
+        return eyeColor;
+    }
+
+}
+```
+
+Secondly crete your Dog and Cat class which will inherit the attributes and behaviors(methods) from the Mammal class using the `extend` keyword.
+
+```Java
+public class Dog extends Mammal {
+    private int barkFrequency = 3;
+
+    public void bark() {
+        // Implementation of bark method
+        for (int i = 0; i < barkFrequency; i++) {
+            System.err.println("Woof");
+        }
+    }
+}
+```
+
+Thirdly create your Cat class that inherit from the Mammal class:
+
+```Java
+public class Cat extends Mammal {
+    private int meowFrequency = 3;
+
+    public void meow() {
+        // Implementation of meow method
+        for (int i = 0; i < meowFrequency; i++) {
+            System.err.println("Meow");
+        }
+    }
+}
+```
+
+### Superclasses and subclasses
+
+The superclass, or parent class (sometimes called base class), contains all the attributes and behaviors that are common to classes that inherit from it. For example, in the case of the Mammal class, all mammals have similar attributes, such as `eyeColor` and `hairColor`, as well as behaviors, such as `generateInternalHeat` and `growHair`. All mammals have these attributes and behaviors, so it is not necessary to duplicate them down the inheritance tree for each type of mammal. Duplication requires a lot more work, and perhaps more worrisome, it can introduce errors and inconsistencies.
+
+The subclass, or child class (sometimes called derived class) is an extension of the superclass. Thus, the Dog and Cat classes inherit all those common attributes and behaviors from the Mammal class. The Mammal class is considered the superclass of the Dog and the Cat subclasses, or child classes.
+
+Inheritance provides a rich set of design advantages. When you’re designing a Cat class,
+the Mammal class provides much of the functionality needed. By inheriting from
+the Mammal object, Cat already has all the attributes and behaviors that make it a true mammal. To make it more specifically a cat type of mammal, the Cat class must include any attributes or behaviors that pertain solely to a cat.

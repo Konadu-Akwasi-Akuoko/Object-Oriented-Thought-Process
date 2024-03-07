@@ -1,0 +1,19 @@
+@startuml cat-and-dog-inheriting-mammal
+class Mammal {
+  -eyeColor: int
+  +getEyeColor(): int
+}
+
+class Dog {
+  -barkFrequency: int
+  +bark(): void
+}
+
+class Cat {
+  -meowFrequency: int
+  +meow(): void
+}
+
+Dog --|> Mammal
+Cat --|> Mammal
+@enduml
