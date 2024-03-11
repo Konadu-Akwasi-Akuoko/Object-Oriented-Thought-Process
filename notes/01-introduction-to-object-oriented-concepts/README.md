@@ -456,3 +456,7 @@ The subclass, or child class (sometimes called derived class) is an extension of
 Inheritance provides a rich set of design advantages. When you’re designing a Cat class,
 the Mammal class provides much of the functionality needed. By inheriting from
 the Mammal object, Cat already has all the attributes and behaviors that make it a true mammal. To make it more specifically a cat type of mammal, the Cat class must include any attributes or behaviors that pertain solely to a cat.
+
+A superclass doesn’t have any inherent knowledge that it’s being used as a superclass. It’s just a class that happens to be extended by another class. The subclass is the one that knows about the superclass because it uses the extends keyword to inherit the properties and methods of the superclass.
+
+## Abstraction
