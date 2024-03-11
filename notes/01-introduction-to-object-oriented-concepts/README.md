@@ -643,4 +643,23 @@ Consider an office suite application that includes a word processing and a sprea
 
 ## Composition
 
+It is natural to think of objects as containing other objects. A television set contains a remote and video display. A computer contains video cards, keyboards, and drives. Although the computer can be considered an object unto itself, the drive is also considered a valid object. In fact, you could open up the computer and remove the drive and hold it in your hand. Both the computer and the drive are considered objects. It is just that the computer contains other objects—such as drives.
 
+In this way, objects are often built, or composed, from other objects: **This is composition.** With composition, we can also build classes by embedding classes in other classes.
+
+### Abstraction in composition
+
+Just as with inheritance, composition provides a mechanism for building objects. In fact, I would argue that there are only two ways to build classes from other classes: inheritance and composition. As we have seen, inheritance allows one class to inherit from another class. We can thus abstract out attributes and behaviors for common classes. For example, dogs and cats are both mammals because a dog is-a mammal and a cat is-a mammal. With composition, we can also build classes by embedding classes in other classes.
+
+Consider the relationship between a car and an engine. The benefits of separating the engine from the car are evident. By building the engine separately, we can use the engine in various cars—not to mention other advantages. But we can’t say that an engine is-a car. This just doesn’t
+sound right when it rolls off the tongue (and because we are modeling real-world systems, this is the effect we want). Rather, we use the term has-a to describe composition relationships. A car has-a(n) engine.
+
+### Has-a relationships
+
+While inheritance is considered an is-a relationship, a composition relationship is termed a has-a relationship. Using the example in the previous section, a television has-a tuner and has-a video display. A television is obviously not a tuner, so there is no inheritance relationship. In the same vein, a computer has-a video card, has-a keyboard, and has-a disk drive.
+
+### Is-A vs Has-A relationships
+
+1. **Inheritance (is-a relationship)**: Inheritance is a mechanism where you can derive a class from another class for a hierarchy of classes that share a set of attributes and methods. The derived class, known as a subclass, inherits the members (fields and methods) of the base class, known as a superclass. This relationship is often referred to as an "is-a" relationship because the subclass is a type of the superclass. For example, a `Dog` is a `Mammal`.
+
+2. **Composition (has-a relationship)**: Composition is a design technique to implement has-a relationship in classes. You can use it to reuse code across classes without the need for inheritance. In composition, references to other objects are used to reuse the behavior (methods) and state (variables) of other objects. This relationship is often referred to as a "has-a" relationship because the complex object will have instances of the simpler objects. For example, a `Car` has an `Engine`.
