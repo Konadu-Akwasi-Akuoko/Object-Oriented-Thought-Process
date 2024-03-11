@@ -1,0 +1,17 @@
+@startuml is-a-relationship
+abstract class Shape {
+    +draw():void
+}
+
+class Circle extends Shape {
+    +draw():void
+}
+
+class Square extends Shape {
+    +draw():void
+}
+
+class Star extends Shape {
+    +draw():void
+}
+@enduml

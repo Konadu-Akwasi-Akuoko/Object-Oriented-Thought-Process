@@ -459,7 +459,7 @@ the Mammal object, Cat already has all the attributes and behaviors that make it
 
 A superclass doesn’t have any inherent knowledge that it’s being used as a superclass. It’s just a class that happens to be extended by another class. The subclass is the one that knows about the superclass because it uses the extends keyword to inherit the properties and methods of the superclass.
 
-## Abstraction
+### Abstraction
 
 An inheritance tree can grow quite large. When the `Mammal` and `Cat` classes are complete, other mammals, such as dogs (or lions, tigers, and bears), can be added quite easily. The `Cat` class can also be a superclass to other classes. For example, it might be necessary to abstract the `Cat` class further, to provide classes for Persian cats, Siamese cats, and so on. Just as with `Cat`, the `Dog` class can be the parent for `GermanShepherd` and `Poodle`. The power of inheritance lies in its abstraction and organization techniques.
 
@@ -509,6 +509,37 @@ public class Main {
 
 In this example, when the `speak()` method is called on a `GermanShepherd` object, the output is "The dog barks", which is the implementation of the `speak()` method in the `Dog` class. The `Mammal` class's `speak()` method is overridden by the `Dog` class's `speak()` method.
 
-## Is-A Relationship
+### Is-A Relationship
+
+Consider a `Shape` example where `Circle`, `Square` , and `Star` all inherit directly from `Shape`. This relationship is often referred to as an **is-a relationship** because a circle is a shape, and a square is a shape. When a subclass inherits from a superclass, it can do anything that the superclass can do. Thus, Circle, Square , and Star are all extensions of Shape.
+
+When we design this Shape system, it would be very helpful to standardize how we use the various shapes. Thus, we could decide that if we want to draw a shape, no matter what shape, we will invoke a method called `draw`. If we adhere to this decision, whenever we want to draw a shape, only the `draw` method needs to be called, regardless of what the shape is. Here lies the fundamental concept of **polymorphism**—it is the individual object’s responsibility, be it a `Circle` , `Star`, or `Square`, to draw itself. This is a common concept in many current software applications, such as drawing and word processing applications.
+
+![is-a relationship in OOP, concept of polymorphism](/uml/chapter_one/is-a-relationship.png)
+
+So, if the `Circle`, `Square`, and `Star` classes each have their own `draw()` method, these methods would override the `draw()` method in the `Shape` superclass. When you call the `draw()` method on an instance of one of the subclasses, the version in the subclass would be the one that gets executed.
+
+```java
+// Superclass
+public class Shape {
+    public void draw() {
+        System.out.println("Drawing a shape");
+    }
+}
+
+// Subclass
+public class Circle extends Shape {
+    public void draw() {
+        System.out.println("Drawing a circle");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Circle circle = new Circle();
+        circle.draw();  // This will output: "Drawing a circle"
+    }
+}
+```
 
 
