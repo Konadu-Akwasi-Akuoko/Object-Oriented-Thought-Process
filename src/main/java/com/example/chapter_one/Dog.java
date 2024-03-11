@@ -9,4 +9,8 @@ public class Dog extends Mammal {
             System.err.println("Woof");
         }
     }
+
+    public String speak() {
+        return "I am a dog";
+    }
 }

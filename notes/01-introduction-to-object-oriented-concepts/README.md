@@ -460,3 +460,55 @@ the Mammal object, Cat already has all the attributes and behaviors that make it
 A superclass doesn’t have any inherent knowledge that it’s being used as a superclass. It’s just a class that happens to be extended by another class. The subclass is the one that knows about the superclass because it uses the extends keyword to inherit the properties and methods of the superclass.
 
 ## Abstraction
+
+An inheritance tree can grow quite large. When the `Mammal` and `Cat` classes are complete, other mammals, such as dogs (or lions, tigers, and bears), can be added quite easily. The `Cat` class can also be a superclass to other classes. For example, it might be necessary to abstract the `Cat` class further, to provide classes for Persian cats, Siamese cats, and so on. Just as with `Cat`, the `Dog` class can be the parent for `GermanShepherd` and `Poodle`. The power of inheritance lies in its abstraction and organization techniques.
+
+![How abstraction works in OOP](/uml/chapter_one/abstraction.png)
+
+These multiple levels of abstraction are one of the reasons why many developers are wary of using inheritance at all. As we will see often, it is difficult to decide how much abstraction is required. For example, if a penguin is a bird and a hawk is a bird, should they both inherit from a class called Bird—a class that has a fly method?
+
+In most recent OO languages (such as Java, .NET, and Swift), a class can have only a single parent class; however, a class can have many child classes. Some languages, such as C++, can have multiple parents. The former case is called **single inheritance**, and the latter is called **multiple inheritance**.
+
+> **Multiple Inheritance:** Consider a child that inherits from both parents. Which pair of eyes does the child inherit? This is a significant problem when it comes to writing a compiler. C++ allows multiple inheritance; many languages do not.
+
+Note that the classes `GermanShepherd` and `Poodle` both inherit from `Dog`— each contains only a single method. However, because they inherit from `Dog`, they also inherit from `Mammal`. Thus, the `GermanShepherd` and `Poodle` classes contain all the attributes and methods included in `Dog` and `Mammal`, as well as their own.
+
+**Method overriding:** if a subclass (in this case, `Dog`) provides its own implementation of a method that is already provided by its parent class (in this case, `Mammal`), then the subclass's version of the method will be called instead of the parent's version.
+
+So, if the `GermanShepherd` class, which is a subclass of `Dog`, calls the `speak()` method, it will call the `speak()` method defined in the `Dog` class, not the one in the `Mammal` class. This is because `Dog` is the immediate superclass of `GermanShepherd`.
+
+Here's a simple example:
+
+```java
+// Superclass
+public class Mammal {
+    public void speak() {
+        System.out.println("The mammal speaks");
+    }
+}
+
+// Subclass of Mammal
+public class Dog extends Mammal {
+    public void speak() {
+        System.out.println("The dog barks");
+    }
+}
+
+// Subclass of Dog
+public class GermanShepherd extends Dog {
+    // No speak() method here, so it will use the one from Dog
+}
+
+public class Main {
+    public static void main(String[] args) {
+        GermanShepherd gs = new GermanShepherd();
+        gs.speak();  // This will output: "The dog barks"
+    }
+}
+```
+
+In this example, when the `speak()` method is called on a `GermanShepherd` object, the output is "The dog barks", which is the implementation of the `speak()` method in the `Dog` class. The `Mammal` class's `speak()` method is overridden by the `Dog` class's `speak()` method.
+
+## Is-A Relationship
+
+

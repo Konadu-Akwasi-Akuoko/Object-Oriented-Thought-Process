@@ -8,4 +8,8 @@ public class Mammal {
         return eyeColor;
     }
 
+    public String speak() {
+        return "I am a mammal";
+    }
+
 }

@@ -1,0 +1,24 @@
+@startuml Abstraction
+class Mammal {
+    -eyeColor:int
+    +getEyeColor():int
+}
+
+class Dog extends Mammal {
+    -barkFrequency:int
+    +bark():void
+}
+
+class Cat extends Mammal {
+    -meowFrequency:int
+    +meow():void
+}
+
+class GermanShepherd extends Dog {
+    +isGerman():void
+}
+
+class Poodle extends Dog {
+    +isFrench():void
+}
+@enduml
