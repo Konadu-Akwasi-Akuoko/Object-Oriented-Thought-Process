@@ -9,6 +9,8 @@ public class ClassToObject {
         private String dateOfBirth;
         private String phoneNumber;
 
+        public Employee employee1 = new Employee();
+
         public void setSocialSecurityNumber(String socialSecurityNumber) {
             this.socialSecurityNumber = socialSecurityNumber;
         }

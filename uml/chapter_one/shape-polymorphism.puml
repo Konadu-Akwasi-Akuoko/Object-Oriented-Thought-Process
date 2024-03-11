@@ -1,0 +1,19 @@
+@startuml shape-polymorphism
+abstract class Shape {
+    -area: double
+    +getArea(): double
+}
+
+class Rectangle extends Shape {
+    -length: double
+    -width: double
+    +Rectangle(): void
+    +getArea(): double
+}
+
+class Circle extends Shape {
+    -radius: double
+    +Circle(): void
+    +getArea(): double
+}
+@enduml

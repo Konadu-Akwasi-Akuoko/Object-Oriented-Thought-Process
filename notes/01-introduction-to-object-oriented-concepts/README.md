@@ -542,4 +542,105 @@ public class Main {
 }
 ```
 
+## Polymorphism
+
+> **Polymorphism** is a Greek word that literally means many shapes.
+
+Although polymorphism is tightly coupled to inheritance, it is often cited separately as one of the most powerful advantages to object-oriented technologies. When a message is sent to an object, the object must have a method defined to respond to that message. In an inheritance hierarchy, all subclasses inherit the interfaces from their superclass. However, because each subclass is a separate entity, each might require a separate response to the same message.
+
+For example, consider the `Shape` class and the behavior called `draw`. When you tell somebody to draw a shape, the first question asked is, “What shape?” No one can draw a shape, because it is an abstract concept (in fact, the `draw` method in the `Shape` code following contains no implementation). You must specify a concrete shape. To do this, you provide the actual implementation in `Circle`. Even though Shape has a `draw` method, `Circle` overrides this method and provides its own `draw` method. Overriding basically means replacing an implementation of a parent with one from a child.
+
+For example, suppose you have an array of three shapes—`Circle`, `Square`, and `Star`. Even though you treat them all as Shape objects, and send a draw message to each Shape object, the end result is different for each because Circle, Square, and Star provide the actual implementations. In short, each class is able to respond differently to the same draw method and draw itself. This is what is meant by polymorphism.
+
+Consider the following Shape class:
+
+```java
+public abstract class Shape {
+
+    private double area;
+
+    public abstract double getArea();
+
+}
+```
+
+The `Shape` class has an attribute called `area` that holds the value for the area of the shape. The method `getArea()` includes an identifier called `abstract`. When a method is defined as abstract, a subclass must provide the implementation for this method; in this case, `Shape` is requiring subclasses to provide a `getArea()` implementation. Now let’s create a class called Circle that inherits from `Shape` (the extends keyword specifies that `Circle` inherits from `Shape`):
+
+```java
+public class Circle extends Shape {
+
+    double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        area = 3.14 * (radius * radius);
+        return (area);
+    }
+
+}
+```
+
+We introduce a new concept here called a constructor. The `Circle` class  has a method with the same name, `Circle`. When a method name is the same as the class and no return type is provided, the method is a special method, called a constructor. Consider a constructor as the entry point for the class, where the object is built; the constructor is a good place to perform initializations and start-up tasks.
+
+The `Circle` constructor accepts a single parameter, representing the radius, and assigns it to the radius attribute of the `Circle` class.
+The `Circle` class also provides the implementation for the `getArea` method, originally defined as abstract in the `Shape` class.
+
+We can create a similar class, called Rectangle:
+
+```java
+public class Rectangle extends Shape {
+
+    double length;
+    double width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public double getArea() {
+        area = length * width;
+        return (area);
+    }
+
+}
+```
+
+Now we can create any number of rectangles, circles, and so on and invoke their `getArea()` method. This is because we know that all rectangles and circles inherit from `Shape`, and all `Shape` classes have a `getArea()` method.
+
+> If a subclass inherits an abstract method from a superclass, it must provide a concrete implementation of that method, or else it will be an abstract class itself. This approach also provides the mechanism to create other, new classes quite easily.
+
+The below UML diagram depicts the concept of polymorphism.
+
+![A shape and it's subclasses using polymorphism](/uml/chapter_one/shape-polymorphism.png)
+
+Thus we can instantiate the `Shape` classes in this way:
+
+```java
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+        Rectangle rectangle = new Rectangle(4, 5);
+
+        System.out.println("Area of circle: " + circle.getArea());
+        System.out.println("Area of rectangle: " + rectangle.getArea());
+    }
+```
+
+In reality, we are sending the same message to all the shapes:
+
+```java
+shape.getArea()
+```
+
+However, the actual behavior that takes place depends on the type of shape. For example, Circle calculates the area for a circle, and Rectangle calculates the area of a rectangle. In effect (and here is the key concept), we are sending a message to the Shape classes and experiencing different behavior depending on what subclass of Shape is being used. This approach is meant to provide standardization for the interface across classes, as well as applications.
+
+Consider an office suite application that includes a word processing and a spreadsheet application. Let’s assume that both have a class called Office which contains an interface called `print()`. This `print()` interface is required for all classes that are part of the office suite. The interesting thing here is that although both the word processor and the spreadsheet invoke the `print()` interface, they do different things: one prints a word processing document and the other a spreadsheet document.
+
+## Composition
+
 

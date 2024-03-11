@@ -1,10 +1,16 @@
 package com.example.chapter_one;
 
+import java.io.*;
+import java.util.*;
+
 public class Main {
 
     public static void main(String[] args) {
-        SquareOfNumber squareOfNumber = new SquareOfNumber();
-        System.err.println("The square of 7 is " + squareOfNumber.getSquare(7));
+        Circle circle = new Circle(5);
+        Rectangle rectangle = new Rectangle(4, 5);
+
+        System.out.println("Area of circle: " + circle.getArea());
+        System.out.println("Area of rectangle: " + rectangle.getArea());
     }
 
 }
