@@ -44,6 +44,6 @@ In the context of Object-Oriented Programming (OOP), the term "interface" can ha
 
 The key difference between these two is that the interface of a class is a broader concept that includes all the ways that other classes or objects can interact with the class, while an interface that a class implements is a specific contract that the class declares it will uphold. Both concepts are central to designing well-structured, modular code in OOP.
 
-So basically, the interface of a class is the set of methods that the class presents publicly to the user. The interface that a class implements is a contract that the class agrees to fulfill. This contract is defined by the methods that the class must implement.
+So basically, the interface of a class is the set of methods that the class presents publicly to the user. The interface that a class implements is a contract that the class agrees to fulfill. This contract is defined by the methods that the class must implement. **So in this chapter we are talking about the interface of a class.**
 
 ### An interface/implementation example
