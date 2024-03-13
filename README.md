@@ -5,3 +5,8 @@
 **Please send me a DM by [Twitter](https://twitter.com/akuoko_konadu) or [LinkedIn](https://www.linkedin.com/in/akuoko-konadu/) if you are the publisher, and you want this repository to be private. I will change the settings accordingly.**
 
 **Contributions:** Issues, comments, and pull requests are welcome
+
+## Table of Contents
+
+1. [Chapter 1: Introduction to Object-Oriented Concepts:](/notes/01-introduction-to-object-oriented-concepts/README.md) This chapter introduces the basic concepts of object-oriented programming and design. It also discusses the differences between object-oriented and procedural programming.
+2. [Chapter 2: How to Think in Terms of Objects:](/notes/02-how-to-think-in-terms-of-objects/README.md) This chapter discusses how to think in terms of objects and how to identify objects in a problem domain.

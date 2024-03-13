@@ -1,0 +1,11 @@
+@startuml Taxi
+class Taxi {
+    +hailTaxi(): void
+    +enterTaxi(): void
+    +greetCabbie(): void
+    +specifyDestination(): void
+    +payCabbie(): void
+    +tipCabbie(): void
+    +leaveTaxi(): void
+}
+@enduml

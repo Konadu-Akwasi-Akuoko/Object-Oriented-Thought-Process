@@ -127,3 +127,74 @@ To our great chagrin, this morning not one user complained. This is because even
 By separating the user interface from the implementation, we can save a lot of headaches down the road. In the [UML diagram](/uml/chapter_two/DatabaseReader.png), the database implementations are transparent to the end users, who see only the interface.
 
 ## Using abstract thinking when designing interfaces
+
+One of the main advantages of OO programming is that classes can be reused. In general, reusable classes tend to have interfaces that are more abstract than concrete. Concrete interfaces tend to be very specific, whereas abstract interfaces are more general. However, simply stating that a highly abstract interface is more useful than a highly concrete interface, although often true, is not always the case.
+
+It is possible to write a very useful, concrete class that is not at all reusable. This happens all the time, and nothing is wrong with it in some situations. However, we are now in the design business and want to take advantage of what OO offers us. So our goal is to design abstract, highly reusable classes—and to do this we will design highly abstract user interfaces. To illustrate the difference between an abstract and a concrete interface, let’s create a taxi object. It is much more useful to have an interface such as “drive me to the airport” than to have separate interfaces such as “turn right,” “turn left,” “start,” “stop,” and so on, because all the user wants to do is get to the airport.
+
+When you emerge from your hotel, throw your bags into the back seat of the taxi, and get in, the cabbie will turn to you and ask, “Where do you want to go?” You reply, “Please take me to the airport.” You might not even know how to get to the airport yourself, and even if you did, you wouldn’t want to have to tell the cabbie when to turn and which direction to turn. You just want to get to the airport. This is a highly abstract interface. The cabbie knows how to get to the airport, and you don’t need to know how to get there. You just need to know how to ask to get there.
+
+The not-so abstract interface would be to tell the cabbie to turn right, turn left, and so on. This is not very useful, because it is not really reusable. You just want to get there to the airport.
+
+Now, where does the connection between abstract and reuse come in? Ask yourself which of these two scenarios is more reusable, the abstract or the not-so-abstract? To put it more simply, which phrase is more reusable: “Take me to the airport,” or “Turn right, then right, then left, then left, then left”? Obviously, the first phrase is more reusable. You can use it in any city, whenever you get into a taxi and want to go to the airport. The second phrase will work only in a specific case. Thus, the abstract interface “Take me to the airport” is generally the way to go for a good, reusable OO design whose implementation would be different in Chicago, New York, or Cleveland.
+
+## Providing the absolute minimal user interface possible
+
+When designing a class, the general rule is to always provide the user with as little knowledge of the inner workings of the class as possible. To accomplish this, follow these simple rules:
+
+- Give the users only what they absolutely need. In effect, this means the class has as few interfaces as possible. When you start designing a class, start with a minimal interface. The design of a class is iterative, so you will soon discover that the minimal set of interfaces might not suffice. This is fine.
+- It is better to have to add interfaces because users really need it than to give the users more interfaces than they need. At times it is highly problematic for the user to have access to certain interfaces. For example, you don’t want an interface that provides salary information to all users—only the ones who need to know.
+- For the moment, let’s use a hardware example to illustrate our software example. Imagine handing a user a PC box without a monitor or a keyboard. Obviously, the PC would be of little use. You have just provided the user with the minimal set of interfaces to the PC. However, this minimal set is insufficient, and it immediately becomes necessary to add interfaces.
+- Public interfaces define what the users can access. If you initially hide the entire class from the user by making the interfaces private, when programmers start using the class, you will be forced to make certain methods/interfaces public—these methods thus become the public interface.
+- It is vital to design classes from a user’s perspective and not from an information systems viewpoint. Too often designers of classes design the class to make it fit into a specific technological model. Even if the designer takes a user’s perspective, it is still probably a technician user’s perspective, and the class is designed with an eye on getting it to work from a technology standpoint and not from ease of use for the user.
+- Make sure when you are designing a class that you go over the requirements and the design with the people who will actually use it—not just developers (this includes all levels of testing). The class will most likely evolve and need to be updated when a prototype of the system is built.
+
+### Determining the users
+
+Let’s look again at the taxi example. We have already decided that the users are the ones who will actually use the system. This said, the obvious question is, who are the users?
+
+The first impulse is to say the customers. This is only about half right. Although the customers are certainly users, the taxi driver(cabbie) must be able to successfully provide the service to the customers. In other words, providing an interface that would, no doubt, please the customer, such as “Take me to the airport for free,” is not going to go over well with the taxi driver. Thus, in reality, to build a realistic and usable interface, both the customer and the taxi driver must be considered users. So basically the taxi driver and the customer will be objects that use the taxi object. And all objects are users of the taxi object.
+
+### Object behavior
+
+Identifying the users is only a part of the exercise. After the users are identified, you must determine the behaviors of the objects. From the viewpoint of all the users, begin identifying the purpose of each object and what it must do to perform properly. Note that many of the initial choices will not survive the final cut of the public interface. These choices are identified by gathering requirements using various methods such as UML Use Cases.
+
+### Environmental constraints
+
+In their book Object-Oriented Design in Java, Gilbert and McCarty point out that the environment often imposes limitations on what an object can do. In fact, environmental constraints are almost always a factor. Computer hardware might limit software functionality. For example, a system might not be connected to a network, or a company might use a specific type of printer. In the taxi example, the cab cannot drive on a road if a bridge is out, even if it provides a quicker way to the airport.
+
+### Identifying the public interfaces
+
+With all the information gathered about the users, the object behaviors, and the environment, you need to determine the public interfaces for each user object from the perspective of other objects. So think about how you would use the taxi object from the customer perspective:
+
+- Get into the taxi.
+- Tell the cabbie where you want to go.
+- Pay the cabbie.
+- Give the cabbie a tip.
+- Get out of the taxi.
+
+What do you need to do to use the taxi object as a customer(from the taxi object perspective)?
+
+- Have a place to go.
+- Hail a taxi.
+- Pay the money.
+
+Initially, you think about how the object is used and not how it is built. You might discover that the object needs more interfaces, such as “Put luggage in the trunk” or “Enter into a mindless conversation with the cabbie.”
+
+![A UML diagram for the cabbie object](/uml/chapter_two/Taxi.png)
+
+As is always the case, nailing down the final interface is an iterative process. For each interface, you must determine whether the interface contributes to the operation of the object. If it does not, perhaps it is not necessary. Many OO texts recommend that each interface model only one behavior. This returns us to the question of how abstract we want to get with the design. If we have an interface called `enterTaxi()`, we certainly do not want `enterTaxi()` to have logic in it to pay the cabbie. If we do this, not only is the design somewhat illogical, but there is virtually no way that a user of the class can tell what has to be done to pay the cabbie.
+
+### Identifying the implementation
+
+After the public interfaces are chosen, you need to identify the implementation. After the class is designed and all the methods required to operate the class properly are in place, the specifics of how to get the class to work are considered.
+
+Technically, anything that is not a public interface can be considered the implementation. This means that the user will never see any of the methods that are considered part of the implementation, including the method’s signature (which includes the name of the method and the parameter list), as well as the actual code inside the method.
+
+It is possible to have a private method that is used internally by the class. Any private method is considered part of the implementation given that the user will never see it and thus will not have access to it. For example, a class may have a `changePassword()` method; however, the same class may have a private method that encrypts the password. This method would be hidden from the user and called only from inside the `changePassword()` method.
+
+The implementation is totally hidden from the user. The code within public methods is a part of the implementation because the user cannot see it. (The user should see only the calling structure of an interface—not the code inside it.)
+
+This means that, theoretically, anything that is considered the implementation might change without affecting how the user interfaces with the class. This assumes, of course, that the implementation is providing the answers the user expects.
+
+Whereas the interface represents how the user sees the object, the implementation is really the nuts and bolts of the object. The implementation contains the code that represents that state of an object.
