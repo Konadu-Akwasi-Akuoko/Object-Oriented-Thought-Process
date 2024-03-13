@@ -1,0 +1,13 @@
+@startuml DatabaseReader
+class DataBaseReader {
+  +open(): void
+  +close(): void
+  +goToFirst(): void
+  +goToLast(): void
+  +howManyRecords(): int
+  +areThereMoreRecords(): boolean
+  +positionRecord(): void
+  +getRecord(): String
+  +getNextRecord(): String
+}
+@enduml

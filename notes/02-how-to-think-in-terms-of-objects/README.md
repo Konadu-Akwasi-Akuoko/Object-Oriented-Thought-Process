@@ -47,3 +47,83 @@ The key difference between these two is that the interface of a class is a broad
 So basically, the interface of a class is the set of methods that the class presents publicly to the user. The interface that a class implements is a contract that the class agrees to fulfill. This contract is defined by the methods that the class must implement. **So in this chapter we are talking about the interface of a class.**
 
 ### An interface/implementation example
+
+Let’s create a simple (if not very functional) database reader class. We’ll write some Java code that will retrieve records from the database. As we’ve discussed, knowing your end users is always the most important issue when doing any kind of design. You should do some analysis of the situation and conduct interviews with end users, and then list the requirements for the project. The following are some requirements we might want to use for the database reader:
+
+- We must be able to open a connection to the database.
+- We must be able to close the connection to the database.
+- We must be able to position the cursor on the first record in the database.
+- We must be able to position the cursor on the last record in the database.
+- We must be able to find the number of records in the database.
+- We must be able to determine whether there are more records in the database (that is, if we are at the end).
+- We must be able to position the cursor at a specific record by supplying the key.
+- We must be able to retrieve a record by supplying a key.
+- We must be able to get the next record, based on the position of the cursor.
+
+With these requirements in mind, we can make an initial attempt to design the database reader class by creating possible interfaces for these end users.
+
+In this case, the database reader class is intended for programmers who require use of a
+database. Thus, the interface is essentially the application-programming interface (API) that the programmer will use. These methods are, in effect, wrappers that enclose the functionality provided by the database system. Why would we do this? We explore this question in much greater detail later in the chapter; the short answer is that we might need to customize some database functionality. For example, we might need to process the objects so that we can write them to a relational database. Writing this middleware is not trivial as far as design and coding go, but it is a real-life example of wrapping functionality. More important, we may want to change the database engine itself without having to change the code.
+
+![A UML diagram for the database reader](/uml/chapter_two/DatabaseReader.png)
+
+Note that the methods in this class are all public (remember that there are plus signs next to the names of methods that are public interfaces). Also note that only the interface is represented; the implementation is not shown. Take a minute to determine whether this class diagram generally satisfies the requirements outlined earlier for the project. If you find out later that the diagram does not meet all the requirements, that’s okay; remember that OO design is an iterative process, so you do not have to get it exactly right the first time.
+
+> As always do not confuse a class interface with the keyword interface which is a contract between a class and implements it in languages like Java, .Net, and TypeScript. Over here we are talking about the interface of a class, thus public methods and properties the class makes available for other objects to interact with it.
+
+For each of the requirements we listed, we need a corresponding method that provides the functionality we want. Now you need to ask a few questions:
+
+- To effectively use this class, do you, as a programmer, need to know anything else about it?
+- Do you need to know how the internal database code opens the database?
+- Do you need to know how the internal database code physically positions itself over a specific record?
+- Do you need to know how the internal database code determines whether any more records are left?
+
+On all counts the answer is a resounding no! You don’t need to know any of this information. All you care about is that you get the proper return values and that the operations are performed correctly. In fact, the application programmer will most likely be at least one more abstract level away from the implementation. The application will use your classes to open the database, which in turn will invoke the proper database API.
+
+> **Minimal Interface:** Although perhaps extreme, one way to determine the minimalist interface is to initially provide the user no public interfaces. Of course, the class will be useless; however, this forces the user to come back to you and say, “Hey, I need this functionality.” Then you can negotiate. Thus, you add interfaces only when it is requested. Never assume that the user needs something. Thus the principle of `least privilege` as we will say in security.
+
+Creating wrappers might seem like overkill, but there are many advantages to writing them. To illustrate, there are many middleware products on the market today. Consider the problem of mapping objects to a relational database. OO databases have never caught on; however, theoretically they may be perfect for OO applications. However, one small problem exists: Most companies have years of data in legacy relational database systems. How can a company embrace OO technologies and stay on the cutting edge while retaining its data in a relational database?
+
+First, you can convert all your legacy, relational data to a brand-new OO database. However, anyone who has suffered the acute (and chronic) pain of any data conversion knows that this is to be avoided at all costs. Although these conversions can take large amounts of time and effort, all too often they never work properly.
+
+Second, you can use a middleware product (drizzle orm) to seamlessly map the objects in your application code to a relational model. This is a much better solution since relational databases are so prevalent. Some might argue that OO databases are much more efficient for object persistence than relational databases. In fact, many development systems seamlessly provide this service.
+
+> **Object Persistence:** Object persistence refers to the concept of saving the state of an object so that it can be restored and used at a later time. An object that does not persist basically dies when it goes out of scope. For example, the state of an object can be saved in a database.
+
+However, in the current business environment, relational-to-object mapping is a great solution. Many companies have integrated these technologies. It is common for a company to have a website front-end interface with data on a mainframe.
+
+If you create a totally OO system, an OO database might be a viable (and better performing) option; however, OO databases have not experienced anywhere near the growth that OO languages have.
+
+Let’s return to the database example. The [UML diagram](/uml/chapter_two/DatabaseReader.png) shows the public interface to the class, and nothing else. When this class is complete, it will probably contain more methods, and it will certainly contain attributes. However, as a programmer using this class, you do not need to know anything about these private methods and attributes. You certainly don’t need to know what the code looks like within the public methods. You simply need to know how to interact with the interfaces.
+
+What would the code for this public interface look like? Let’s look at the `open()` method:
+
+```java
+    public void open(String name) {
+        // Some application-specific processing
+
+        // call the Oracle API to open the database
+
+        // Some more application-specific processing
+    }
+```
+
+In this case, you, wearing your programmer’s hat, realize that the open method requires String as a parameter. Name, which represents a database file, is passed in, but it’s not important to explain how Name is mapped to a specific database for this example. That’s all we need to know. Now comes the fun stuff—what really makes interfaces so great!
+
+Just to annoy our users, let’s change the database implementation. Last night we translated all the data from an Oracle database to an SQLAnywhere database (we endured the acute and chronic pain). It took us hours—but we did it.
+
+```java
+    public void open(String name) {
+        // Some application-specific processing
+
+        // call the SQLAnywhere API to open the database
+
+        // Some more application-specific processing
+    }
+```
+
+To our great chagrin, this morning not one user complained. This is because even though the implementation changed, the interface did not! As far as the user is concerned, the calls are still the same. The code change for the implementation might have required quite a bit of work (and the module with the one-line code change would have to be rebuilt), but not one line of application code that uses this DataBaseReader class needed to change.
+
+By separating the user interface from the implementation, we can save a lot of headaches down the road. In the [UML diagram](/uml/chapter_two/DatabaseReader.png), the database implementations are transparent to the end users, who see only the interface.
+
+## Using abstract thinking when designing interfaces
