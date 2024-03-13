@@ -236,10 +236,8 @@ The data of a class is represented by `attributes`. Each class must define the a
 Methods implement the required behavior of a class. Every object instantiated from this class includes methods as defined by the class. Methods may implement behaviors that are called from other objects (messages) or provide the fundamental, internal behavior of the class. **Internal behaviors are private methods** that are not accessible by other objects. Here is an example of a private method:
 
 ```java
-    public static void main(String[] args) {
-        Person person = new Person();
-        person.setName("John Doe");
-        person.printName();
+    private void printName() {
+        System.out.println(name);
     }
 ```
 
