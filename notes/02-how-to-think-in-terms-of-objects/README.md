@@ -65,7 +65,7 @@ With these requirements in mind, we can make an initial attempt to design the da
 In this case, the database reader class is intended for programmers who require use of a
 database. Thus, the interface is essentially the application-programming interface (API) that the programmer will use. These methods are, in effect, wrappers that enclose the functionality provided by the database system. Why would we do this? We explore this question in much greater detail later in the chapter; the short answer is that we might need to customize some database functionality. For example, we might need to process the objects so that we can write them to a relational database. Writing this middleware is not trivial as far as design and coding go, but it is a real-life example of wrapping functionality. More important, we may want to change the database engine itself without having to change the code.
 
-![A UML diagram for the database reader](/uml/chapter_two/DatabaseReader.png)
+![A UML diagram for the database reader](/uml/chapter_02/DatabaseReader.png)
 
 Note that the methods in this class are all public (remember that there are plus signs next to the names of methods that are public interfaces). Also note that only the interface is represented; the implementation is not shown. Take a minute to determine whether this class diagram generally satisfies the requirements outlined earlier for the project. If you find out later that the diagram does not meet all the requirements, that’s okay; remember that OO design is an iterative process, so you do not have to get it exactly right the first time.
 
@@ -94,7 +94,7 @@ However, in the current business environment, relational-to-object mapping is a 
 
 If you create a totally OO system, an OO database might be a viable (and better performing) option; however, OO databases have not experienced anywhere near the growth that OO languages have.
 
-Let’s return to the database example. The [UML diagram](/uml/chapter_two/DatabaseReader.png) shows the public interface to the class, and nothing else. When this class is complete, it will probably contain more methods, and it will certainly contain attributes. However, as a programmer using this class, you do not need to know anything about these private methods and attributes. You certainly don’t need to know what the code looks like within the public methods. You simply need to know how to interact with the interfaces.
+Let’s return to the database example. The [UML diagram](/uml/chapter_02/DatabaseReader.png) shows the public interface to the class, and nothing else. When this class is complete, it will probably contain more methods, and it will certainly contain attributes. However, as a programmer using this class, you do not need to know anything about these private methods and attributes. You certainly don’t need to know what the code looks like within the public methods. You simply need to know how to interact with the interfaces.
 
 What would the code for this public interface look like? Let’s look at the `open()` method:
 
@@ -124,7 +124,7 @@ Just to annoy our users, let’s change the database implementation. Last night 
 
 To our great chagrin, this morning not one user complained. This is because even though the implementation changed, the interface did not! As far as the user is concerned, the calls are still the same. The code change for the implementation might have required quite a bit of work (and the module with the one-line code change would have to be rebuilt), but not one line of application code that uses this DataBaseReader class needed to change.
 
-By separating the user interface from the implementation, we can save a lot of headaches down the road. In the [UML diagram](/uml/chapter_two/DatabaseReader.png), the database implementations are transparent to the end users, who see only the interface.
+By separating the user interface from the implementation, we can save a lot of headaches down the road. In the [UML diagram](/uml/chapter_02/DatabaseReader.png), the database implementations are transparent to the end users, who see only the interface.
 
 ## Using abstract thinking when designing interfaces
 
@@ -181,7 +181,7 @@ What do you need to do to use the taxi object as a customer(from the taxi object
 
 Initially, you think about how the object is used and not how it is built. You might discover that the object needs more interfaces, such as “Put luggage in the trunk” or “Enter into a mindless conversation with the cabbie.”
 
-![A UML diagram for the cabbie object](/uml/chapter_two/Taxi.png)
+![A UML diagram for the cabbie object](/uml/chapter_02/Taxi.png)
 
 As is always the case, nailing down the final interface is an iterative process. For each interface, you must determine whether the interface contributes to the operation of the object. If it does not, perhaps it is not necessary. Many OO texts recommend that each interface model only one behavior. This returns us to the question of how abstract we want to get with the design. If we have an interface called `enterTaxi()`, we certainly do not want `enterTaxi()` to have logic in it to pay the cabbie. If we do this, not only is the design somewhat illogical, but there is virtually no way that a user of the class can tell what has to be done to pay the cabbie.
 

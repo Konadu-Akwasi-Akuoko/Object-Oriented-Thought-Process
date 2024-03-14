@@ -141,3 +141,40 @@ public class GetCab {
 public void getCab (String cabbieName);
 public int getCab (String cabbieName);
 ```
+
+By using different signatures, you can construct objects differently depending on the constructor used. This functionality is very helpful when you don’t always know ahead of time how much information you have available. For example, when creating a shopping cart, customers may already be logged in to their account (and you will have all of their information). On the other hand, a totally new customer may be placing items in the cart with no account information available at all. In each case the constructor would initialize differently.
+
+### Using UML to model classes
+
+Consider that we have two ways we can construct a database reader:
+
+- Pass the name of the database and position the cursor at the beginning of the database.
+- Pass the name of the database and the position within the database where we want the cursor to position itself.
+
+![A database reader class UML diagram](/uml/chapter_03/DatabaseReader.png)
+
+> **No Return Type:** Notice that in this class diagram the constructors do not have a return type. All other methods besides constructors must have return types.
+
+Here is a code segment of the class that shows its constructors and the attributes that the constructors initialize:
+
+```java
+public class DatabaseReader {
+
+    String dbName;
+    int startPosition;
+
+    // initialize just the name
+    public DatabaseReader(String name) {
+        dbName = name;
+        startPosition = 0;
+    }
+
+    public DatabaseReader(String name, int pos) {
+        dbName = name;
+        startPosition = pos;
+    }
+
+}
+```
+
+Note how `startPosition` is initialized in both cases. If the constructor is not passed the information via the parameter list, it is initialized to a default value, such as `0`.

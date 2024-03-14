@@ -25,7 +25,7 @@ In structured or procedural programming the data is often separated from the pro
 Objects are much more than data structures and primitive data types, such as integers
 and strings. Although objects do contain entities such as integers and strings, which are used to represent attributes, they also contain methods, which represent behaviors.
 
-In an object, methods are used to perform operations on the data as well as other actions. Perhaps more important, you can control access to members of an object (both attributes and methods). This means that some members, both attributes and methods, can be hidden from other objects. For instance, an object called Math might contain two integers, called myInt1and myInt2. Most likely, the Math object also contains the necessary methods to set and retrieve the values of myInt1 and myInt2. It might also contain a method called sum() to add the two integers together. Check out the example below. ([Typescript version](/typescript/chapter_one/Maths.ts))
+In an object, methods are used to perform operations on the data as well as other actions. Perhaps more important, you can control access to members of an object (both attributes and methods). This means that some members, both attributes and methods, can be hidden from other objects. For instance, an object called Math might contain two integers, called myInt1and myInt2. Most likely, the Math object also contains the necessary methods to set and retrieve the values of myInt1 and myInt2. It might also contain a method called sum() to add the two integers together. Check out the example below. ([Typescript version](/typescript/chapter_01/Maths.ts))
 
 ```java
 public class Math {
@@ -101,7 +101,7 @@ public class Employee {
 The behavior of an object represents what the object can do. In procedural languages the behavior is defined by procedures, functions, and subroutines. In OO programming terminology, these behaviors are contained in methods, and you invoke a method by sending a message to it. In our employee example, consider that one of the  behaviors required of an employee object is to set and return the values of the various attributes. Thus, each attribute would have corresponding methods, such as setGender() and getGender(). In this case, when another object needs this information, it can send a message to an employee object and ask it what its gender is. The below example shows how these methods work.
 
 ```java
-package com.example.chapter_one;
+package com.example.chapter_01;
 
 public class Employee {
 
@@ -130,7 +130,7 @@ So let's say we have a `Payroll` object which contains a method called Calculate
 
 The below diagram is a class diagram representing the Employee/Payroll system we have been talking about.
 
-![A UML diagram of the class representing Employee and Payroll classes](/uml/chapter_one/employee-payroll.png)
+![A UML diagram of the class representing Employee and Payroll classes](/uml/chapter_01/employee-payroll.png)
 
 Each class diagram is defined by three separate sections: the name itself, the data (attributes), and the behaviors (methods). For example the Employee class diagram’s attribute section contains `SocialSecurityNumber`, `Gender`, and `dateOfBirth`, whereas the method section contains the methods that operate on these attributes.
 
@@ -385,7 +385,7 @@ Inheritance enables a class to inherit the attributes and methods of another cla
 
 One of the major design issues in OO programming is to factor out commonality of the various classes. For example, suppose you have a Dog class and a Cat class, and each will have an attribute for eye color. In a procedural model, the code for Dog and Cat would each contain this attribute. In an OO design, the color attribute could be moved up to a class called Mammal—along with any other common attributes and methods. In this case, both Dog and Cat inherit from the Mammal class, as shown in the below figure.
 
-![Dog and cat inheriting from the mammal class](/uml/chapter_one/cat-and-dog-inheriting-mammal.png)
+![Dog and cat inheriting from the mammal class](/uml/chapter_01/cat-and-dog-inheriting-mammal.png)
 
 The Dog and Cat classes both inherit from Mammal. This means that a Dog class has the following attributes:
 
@@ -461,7 +461,7 @@ A superclass doesn’t have any inherent knowledge that it’s being used as a s
 
 An inheritance tree can grow quite large. When the `Mammal` and `Cat` classes are complete, other mammals, such as dogs (or lions, tigers, and bears), can be added quite easily. The `Cat` class can also be a superclass to other classes. For example, it might be necessary to abstract the `Cat` class further, to provide classes for Persian cats, Siamese cats, and so on. Just as with `Cat`, the `Dog` class can be the parent for `GermanShepherd` and `Poodle`. The power of inheritance lies in its abstraction and organization techniques.
 
-![How abstraction works in OOP](/uml/chapter_one/abstraction.png)
+![How abstraction works in OOP](/uml/chapter_01/abstraction.png)
 
 These multiple levels of abstraction are one of the reasons why many developers are wary of using inheritance at all. As we will see often, it is difficult to decide how much abstraction is required. For example, if a penguin is a bird and a hawk is a bird, should they both inherit from a class called Bird—a class that has a fly method?
 
@@ -513,7 +513,7 @@ Consider a `Shape` example where `Circle`, `Square` , and `Star` all inherit dir
 
 When we design this Shape system, it would be very helpful to standardize how we use the various shapes. Thus, we could decide that if we want to draw a shape, no matter what shape, we will invoke a method called `draw`. If we adhere to this decision, whenever we want to draw a shape, only the `draw` method needs to be called, regardless of what the shape is. Here lies the fundamental concept of **polymorphism**—it is the individual object’s responsibility, be it a `Circle` , `Star`, or `Square`, to draw itself. This is a common concept in many current software applications, such as drawing and word processing applications.
 
-![is-a relationship in OOP, concept of polymorphism](/uml/chapter_one/is-a-relationship.png)
+![is-a relationship in OOP, concept of polymorphism](/uml/chapter_01/is-a-relationship.png)
 
 So, if the `Circle`, `Square`, and `Star` classes each have their own `draw()` method, these methods would override the `draw()` method in the `Shape` superclass. When you call the `draw()` method on an instance of one of the subclasses, the version in the subclass would be the one that gets executed.
 
@@ -615,7 +615,7 @@ Now we can create any number of rectangles, circles, and so on and invoke their 
 
 The below UML diagram depicts the concept of polymorphism.
 
-![A shape and it's subclasses using polymorphism](/uml/chapter_one/shape-polymorphism.png)
+![A shape and it's subclasses using polymorphism](/uml/chapter_01/shape-polymorphism.png)
 
 Thus we can instantiate the `Shape` classes in this way:
 
