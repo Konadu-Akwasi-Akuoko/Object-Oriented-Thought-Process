@@ -1,4 +1,4 @@
-package com.example.chapter_two;
+package com.example.chapter_02;
 
 public class Main {
 
