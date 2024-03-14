@@ -1,4 +1,4 @@
-package com.example.chapter_one;
+package com.example.chapter_01;
 
 public class Cat extends Mammal {
     private int meowFrequency = 3;

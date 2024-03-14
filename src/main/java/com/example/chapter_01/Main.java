@@ -1,4 +1,4 @@
-package com.example.chapter_one;
+package com.example.chapter_01;
 
 import java.io.*;
 import java.util.*;

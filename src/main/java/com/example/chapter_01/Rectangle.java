@@ -1,4 +1,4 @@
-package com.example.chapter_one;
+package com.example.chapter_01;
 
 class Rectangle extends Shape {
 
