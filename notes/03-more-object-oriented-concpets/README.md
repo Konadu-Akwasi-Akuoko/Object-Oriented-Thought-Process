@@ -178,3 +178,15 @@ public class DatabaseReader {
 ```
 
 Note how `startPosition` is initialized in both cases. If the constructor is not passed the information via the parameter list, it is initialized to a default value, such as `0`.
+
+### How the superclass is constructed
+
+When using inheritance, you must know how the parent class is constructed. Remember that when you use inheritance, you are inheriting everything about the parent. Thus, you must become intimately aware of all the parent’s data and behavior. The inheritance of an attribute is fairly obvious; however, how a constructor is inherited is not as obvious. After the `new` keyword is encountered and the object is allocated, the following steps occur:
+
+1. Inside the constructor of the base class, the constructor of the class’s superclass is called. If there is no explicit call to the superclass constructor, the default is called automatically; however, you can see the code in the bytecodes.
+2. Each class attribute of the object is initialized. These are the attributes that are part of the class definition (instance variables), not the attributes inside the constructor or any other method (local variables). In the DataBaseReader code presented earlier, the integer `startPosition` is an instance variable of the class.
+3. The rest of the code in the constructor executes.
+
+> **Note:**  If a constructor doesn't have an explicit call to `super(...)`, there's always an implicit call to `super()` (with no args).
+
+### The design of constructors
