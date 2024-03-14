@@ -79,4 +79,65 @@ Always remember that the default constructor is added only if you don’t includ
 
 In many cases, an object can be constructed in more than one way. To accommodate this situation, you need to provide more than one constructor. For example, let’s consider the `Count` class presented here:
 
+```java
+public class Count {
+    int count;
 
+    public Count() {
+        count = 0;
+    }
+
+}
+```
+
+On the one hand, we want to initialize the attribute `count` to zero: We can easily accomplish this by having a constructor initialize count to zero as follows:
+
+```java
+    public Count() {
+        count = 0;
+    }
+```
+
+On the other hand, we might want to pass an initialization parameter that allows count to be set to various numbers:
+
+```java
+    public Count(int number) {
+        count = number;
+    }
+```
+
+This is called overloading a method or method overloading (overloading pertains to all methods, not just constructors). Most OO languages provide functionality for overloading a method.
+
+> In typescript method overloading works a different way, check [this stackoverflow post about method overloading](https://stackoverflow.com/questions/12688275/how-to-do-method-overloading-in-typescript/12689054#12689054). And also constructor overloading works different in typescript, check [this stackoverflow answer about constructor overloading](https://stackoverflow.com/questions/12702548/constructor-overload-in-typescript) for more information.
+
+### Overloading methods
+
+Overloading allows a programmer to use the same method name over and over, as long as the signature of the method is different each time. The signature consists of the method name and a parameter list
+
+The signature of a method consists of the name of the method and the description (i.e., type, number, and position) of its *parameters*.
+
+Thus, the following methods all have different signatures:
+
+```java
+public class GetCab {
+
+    public void GetCab() {
+    }
+
+    // different parameter list
+    public void GetCab(String cabbieName) {
+    }
+
+    // different parameter list
+    public void GetCab(int numberOfPassengers) {
+    }
+
+}
+```
+
+> **Signatures:** Depending on the language, the signature may or may not include the return type. In Java and C#, the return type is not part of the signature. For example, the following methods would conflict even though the return types are different:
+
+```java
+public void getCab (String cabbieName);
+public int getCab (String cabbieName);
+```
