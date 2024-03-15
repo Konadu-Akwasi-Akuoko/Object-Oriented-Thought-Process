@@ -510,3 +510,63 @@ Count Count2 = new Count();
 For the sake of argument, let’s say that the object `Count1` is going merrily about its way and is using count as a means of keeping track of the pixels on a computer screen. This is not a problem until the object `Count2` decides to use attribute `count` to keep track of sheep. The instant that `Count2` records its first sheep, the data that `Count1.count` was saving is lost. In practice, there might not be a lot of uses for static methods. Make sure you are confident in their use before incorporating them in designs.
 
 > **Difference between static and abstract keywords:** Static is initialized once, for example our attribute or method can be initialized only once when we use the static keyword. But an abstract class is a class which can have one or more than one abstract methods. Abstract methods are those which don't have implementation/body rather only has its declaration, so it is left to the class that extends it to provide implementation.
+
+## Operator overloading
+
+Some OO languages enable you to overload an operator. C++ is an example of one such language. Operator overloading enables you to change the meaning of an operator. For example, when most people see a plus sign, they assume it represents addition. If you see the equation `X = 5 + 6;` you expect that X would contain the value 11. And in this case, you would be correct.
+
+However, at times a plus sign could represent something else. For example, in the following code:
+
+```java
+String firstName = "Joe";
+String secondName = "Smith";
+
+String Name = firstName + " " + secondName;
+```
+
+> **Overloading:** in this context explains that operator overloading refers to giving an operator a new meaning besides its usual meaning, in the context of object-oriented programming languages.
+
+You would expect that Name would contain `Joe Smith`. The plus sign here has been overloaded to perform string concatenation.
+
+> **String Concatenation:** String concatenation occurs when two separate strings are combined to create a new, single string.
+
+In the context of strings, the plus sign does not mean addition of integers or floats but concatenation of strings.
+
+What about matrix addition? You could have code like this:
+
+```java
+Matrix a, b, c;
+c = a + b;
+```
+
+Thus, the plus sign now performs matrix addition, not addition of integers or floats. Overloading is a powerful mechanism. However, it can be downright confusing for people who read and maintain code. In fact, developers can confuse themselves. To take this to an extreme, it would be possible to change the operation of addition to perform subtraction. Why not? Operator overloading allows you to change the meaning of an operator. Thus, if the plus sign were changed to perform subtraction, the following code would result in an X value of —1: `x = 5 + 6;`.
+
+OO languages such as Java and .NET do not allow operator overloading.
+
+Although these languages do not allow the option of overloading operators, the languages themselves do overload the plus sign for string concatenation, but that’s about it. The designers of Java must have decided that operator overloading was more of a problem than it was worth. If you must use operator overloading in C++, take care by documenting and commenting properly so the people who will use the class are not confused.
+
+## Multiple inheritance
+
+As the name implies, multiple inheritance allows a class to inherit from more than one class. In practice, this seems like a great idea. Objects are supposed to model the real world, are they not? And many real-world examples of multiple inheritance exist. Parents are a good example of multiple inheritance. Each child has two parents—that’s just the way it is. So it makes sense that you can design classes by using multiple inheritance. In some OO languages, such as C++, you can.
+
+However, this situation falls into a category similar to operator overloading. Multiple inheritance is a very powerful technique, and in fact, some problems are quite difficult to solve without it. Multiple inheritance can even solve some problems quite elegantly. However, multiple inheritance can significantly increase the complexity of a system, both for the programmer and the compiler writers.
+
+The designers of Java, .NET, Typescript, and Swift decided that the increased complexity of allowing multiple inheritance far outweighed its advantages, so they simply did not implement it. In some ways, Java, .NET, Typescript, and Swift compensate for this; however, the bottom line is that Java, .NET, Typescript, and Swift do not allow conventional multiple inheritance.
+
+The modern concept of inheritance is that you can only inherit attributes from a single parent (single inheritance). Even though you can use multiple interfaces or protocols, this is not truly multiple inheritance.
+
+> **Behavioral and Implementation Inheritance:** Interfaces are a mechanism for behavioral inheritance, whereas abstract classes are used for implementation inheritance. Note you `extend` abstract classes(implementation), and you `inherit` from interfaces(behavioral). So basically in behavioral inheritance you implement the behavior in the class that inherits the interface, and in implementation inheritance the implementation is handled by the superclass, that base class extends from. The bottom line is that interface language constructs provide behavioral interfaces but no implementation, whereas abstract classes may provide both interfaces and implementation.
+
+## Objects operation
+
+Some of the most basic operations in programming become more complicated when you’re dealing with complex data structures and objects. For example, when you want to copy or compare primitive data types, the process is quite straightforward. However, copying and comparing objects is not quite as simple. In his book Effective C++, Scott Meyers devotes an entire section to copying and assigning objects.
+
+> **Classes and References:** The problem with complex data structures and objects is that they might contain references. Simply making a copy of the reference does not copy the data structures or the object that it references. In the same vein, when comparing objects, simply comparing a pointer to another pointer only compares the references—not what they point to.
+
+The problems arise when comparisons and copies are performed on objects. Specifically, the question boils down to whether you follow the pointers. Regardless, there should be a way to copy an object. Again, this is not as simple as it might seem. Because objects can contain references, these reference trees must be followed to do a valid copy (if you truly want to do a deep copy).
+
+> **Deep Versus Shallow Copies:** A deep copy occurs when all the references are followed and new copies are created for all referenced objects. Many levels might be involved in a deep copy. For objects with references to many objects, which in turn might have references to even more objects, the copy itself can create significant overhead. A shallow copy would simply copy the reference and not follow the levels. Gilbert and McCarty have a good discussion about what shallow and deep hierarchies are in Object-Oriented Design in Java in a section called “Prefer a Tree to a Forest.”
+
+If you do a simple copy of the object (called a bitwise copy), only the references are copied—not any of the actual objects. Thus, both objects (the original and the copy) will reference (point to) the same objects. To perform a complete copy, in which all reference objects are copied, you must write code to create all the sub-objects.
+
+This problem also manifests itself when comparing objects. As with the copy function, this is not as simple as it might seem. Because objects contain references, these reference trees must be followed to do a valid comparison of objects. In most cases, languages provide a default mechanism to compare objects. As is usually the case, do not count on the default mechanism. When designing a class, you should consider providing a comparison function in your class that you know will behave as you want it to.
