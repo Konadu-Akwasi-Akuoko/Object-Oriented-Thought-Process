@@ -190,3 +190,15 @@ When using inheritance, you must know how the parent class is constructed. Remem
 > **Note:**  If a constructor doesn't have an explicit call to `super(...)`, there's always an implicit call to `super()` (with no args).
 
 ### The design of constructors
+
+As we have already seen, when designing a class, it is good practice to initialize all the attributes. In some languages, the compiler provides some sort of initialization. As always, don’t count on the compiler to initialize attributes! In Java, you cannot use an attribute until it is initialized. If the attribute is first set in the code, make sure that you initialize the attribute to some valid condition—for example, set an integer to zero.
+
+Constructors are used to ensure that the application is in a stable state (I like to call it a “safe” state). For example, initializing an attribute to zero, when it is intended for use as a denominator in a division operation, might lead to an unstable application. You must take into consideration that a division by zero is an illegal operation. Initializing to zero is not always the best policy.
+
+During the design, it is good practice to identify a stable state for all attributes and then initialize them to this stable state in the constructor.
+
+## Error handling
+
+It is extremely rare for a class to be written perfectly the first time. In most, if not all, situations, things will go wrong. Any developer who does not plan for problems is inviting disaster.
+
+Assuming that your code has the capability to detect and trap an error condition, you can handle the error in several ways: In Chapter 11 of their book Java Primer Plus, Tyma, Torok, and Downing state that there are three basic solutions to handling problems that are detected in a program: fix it, ignore the problem by squelching it, or exit the runtime in some graceful manner.
