@@ -331,4 +331,180 @@ Multiple objects can be instantiated from a single class. Each of these objects 
 
 > A **Shared Method:** A constructor is a good example of a method that is shared by all instances of a class.
 
+Methods represent the behaviors of an object; the state of the object is represented by attributes. There are three types of attributes:
 
+- Local attributes
+- Object attributes
+- Class attributes
+
+### Local attributes
+
+Local attributes are owned by a specific method. Consider the following code:
+
+```java
+public class Number {
+
+    public void method1() {
+        int count;
+    }
+
+    public void method2() {
+
+    }
+
+}
+```
+
+The method `method1` contains a local variable called `count`. This integer is accessible only inside `method1`. The method `method2` has no idea that the integer `count` even exists. At this point, we introduce a very important concept: scope. Attributes (and methods) exist within a particular scope.
+
+In this case, the integer count exists within the scope of `method1`. In Java, C#, C++, Typescript, and Swift, scope is delineated by curly braces ({}). In the Number class, there are several possible scopes—just start matching the curly braces.
+
+The class itself has its own scope. Each instance of the class (that is, each object) has its own scope. Both `method1` and `method2` have their own scopes as well. Because count lives within `method1`’s curly braces, when `method1` is invoked, a copy of count is created. When `method1` terminates, the copy of count is removed.
+
+For some more fun, look at this code:
+
+```java
+public class Number {
+
+    public void method1() {
+        int count;
+    }
+
+    public void method2() {
+        int count;
+    }
+
+}
+```
+
+This example has two copies of an integer count in this class. Remember that `method1` and `method2` each has its own scope. Thus, the compiler can tell which copy of count to access simply by recognizing which method it is in. You can think of it in these terms:
+
+```plaintext
+<!-- Note this is what the compiler sees, and this won't work inside your code if you do this -->
+method1.count;
+method2.count;
+```
+
+As far as the compiler is concerned, the two attributes are easily differentiated, even though they have the same name. It is almost like two people having the same last name, but based on the context of their first names, you know that they are two separate individuals.
+
+### Object attributes
+
+In many design situations, an attribute must be shared by several methods within the same object. For example, three objects have been constructed from a single class. Consider the following code:
+
+```java
+public class Number {
+
+    int count;
+
+    public void method1() {
+        count = 1;
+    }
+
+    public void method2() {
+        count = 2;
+    }
+
+}
+```
+
+And creating the objects:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Number number1 = new Number();
+        Number number2 = new Number();
+        Number number3 = new Number();
+    }
+}
+```
+
+Note here that the class attribute count is declared outside the scope of both `method1` and `method2`. However, it is within the scope of the class. Thus, count is available to both `method1` and `method2`. (Basically, all methods in the class have access to this attribute.) Notice that the code for both methods is setting count to a specific value. There is only one copy of count for the entire object, so both assignments operate on the same copy in memory. However, this copy of count is not shared between different objects. To illustrate this, we created three copies of the Number class:
+
+```java
+Number number1 = new Number();
+Number number2 = new Number();
+Number number3 = new Number();
+```
+
+Each of these objects—`number1`, `number2`, and `number3`—is constructed separately and is allocated its own resources. There are three separate instances of the integer count. When `number1` changes its attribute count, this in no way affects the copy of count in object `number2` or object `number3`. In this case, integer count is an object attribute.
+
+You can play some interesting games with scope. Consider the following code:
+
+```java
+public class Number {
+
+    int count;
+
+    public void method1() {
+        int count;
+    }
+
+    public void method2() {
+        int count;
+    }
+
+}
+```
+
+In this case, three totally separate memory locations have the name of `count` for each object. The object owns one copy, and `method1()` and `method2()` each have their own copy. To access the object variable from within one of the methods, say `method1()`, you can use a pointer called this in the C-based languages:
+
+```java
+public void method1() {
+    int count;
+    this.count = 1;
+}
+```
+
+The use of the `this` keyword directs the compiler to access the object variable `count` and not the local variables within the method bodies.
+
+> **Note:** The keyword `this` is a reference to the current object.
+
+### Class attributes
+
+It is possible for two or more objects of the same class to share attributes, thus all objects will just use one attribute. In Java, C#, C++, Typescript, and Swift, you do this by making the attribute static:
+
+```java
+public class Number {
+
+    static int count;
+
+    public void method1() {
+        int count;
+        this.count = 1;
+    }
+
+    public void method2() {
+        int count;
+    }
+
+}
+```
+
+By declaring `count` as `static`, this attribute is allocated a single piece of memory for all objects instantiated from the class. Thus, all objects of the class use the same memory location for `count`. Essentially, each class has a single copy, which is shared by all objects of that class. This is about as close to global data as we get in OO design. Also you can use the `static` keyword for creating only one method and sharing it across all instantiated objects of a class:
+
+```java
+public class Number {
+
+    static int count;
+
+    public void method1() {
+        int count;
+        this.count = 1;
+    }
+
+    public static void method2() {
+        int count;
+    }
+
+}
+```
+
+There are many valid uses for class attributes; however, you must be aware of potential synchronization problems. Let’s instantiate two `Count` objects:
+
+```java
+Count Count1 = new Count();
+Count Count2 = new Count();
+```
+
+For the sake of argument, let’s say that the object `Count1` is going merrily about its way and is using count as a means of keeping track of the pixels on a computer screen. This is not a problem until the object `Count2` decides to use attribute `count` to keep track of sheep. The instant that `Count2` records its first sheep, the data that `Count1.count` was saving is lost. In practice, there might not be a lot of uses for static methods. Make sure you are confident in their use before incorporating them in designs.
