@@ -202,3 +202,133 @@ During the design, it is good practice to identify a stable state for all attrib
 It is extremely rare for a class to be written perfectly the first time. In most, if not all, situations, things will go wrong. Any developer who does not plan for problems is inviting disaster.
 
 Assuming that your code has the capability to detect and trap an error condition, you can handle the error in several ways: In Chapter 11 of their book Java Primer Plus, Tyma, Torok, and Downing state that there are three basic solutions to handling problems that are detected in a program: fix it, ignore the problem by squelching it, or exit the runtime in some graceful manner.
+
+In Chapter 4 of their book Object-Oriented Design in Java, Gilbert and McCarty expand on this theme by adding the choice of throwing an exception:
+
+- Ignore the problem—not a good idea!
+- Check for potential problems and abort the program when you find a problem.
+- Check for potential problems, catch the mistake, and attempt to fix the problem.
+- Throw an exception. (Often this is the preferred way to handle the situation.)
+
+### Ignoring the problem
+
+Simply ignoring a potential problem is a recipe for disaster. And if you are going to ignore the problem, why bother detecting it in the first place? It is obvious that you should not ignore any known problem. The primary directive for all applications is that the application should never crash. If you do not handle your errors, the application will eventually terminate ungracefully or continue in a mode that can be considered an unstable state—possibly with corrupted data. In the latter case, you might not even know you are getting incorrect results, and that can be much worse than a program crash, because it can even lead to death.
+
+### Checking for problems and aborting the application
+
+If you choose to check for potential problems and abort the application when a problem is detected, the application can display a message indicating that a problem exists. In this case the application gracefully exits, and the user is left staring at the computer screen, shaking her head and wondering what just happened. Although this is a far superior option to ignoring the problem, it is by no means optimal. However, this does allow the system to clean up things and put itself in a more stable state, such as closing files and forcing a system restart.
+
+### Checking for problems and attempting to recover
+
+Checking for potential problems, catching the mistake, and attempting to recover is a far superior solution than simply checking for problems and aborting. In this case, the problem is detected by the code, and the application attempts to fix itself. This works well in certain situations. For example, consider the following code:
+
+```java
+import java.util.Scanner;
+
+public class ErrorHandling {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Type a number we can use to divide 100:");
+        String denominator = scanner.nextLine();
+
+        while (Double.parseDouble(denominator) == 0 || Double.parseDouble(denominator) > 100) {
+            System.out.println("We want a number we can use to divide 100 and it must not be 0 or higher than 100:");
+            denominator = scanner.nextLine();
+        }
+
+        double result = 100 / Double.parseDouble(denominator);
+
+        System.out.println("The result of 100 divided by " + denominator + " is: " + result);
+
+        scanner.close();
+    }
+
+}
+```
+
+It is obvious that if the `while` conditional statement is not included in the code, and a zero makes its way to the divide statement, you will get a system exception because you cannot divide by zero. By catching the exception and setting the variable `denominator` to 1, at least the system will not crash, but that is not what we are doing.
+
+However, setting the `denominator` to 1 might not be a proper solution because the result would be incorrect. The better solution would be to prompt the user to reenter the proper input value, as we are doing.
+
+> **A Mix of Error-Handling Techniques:** Despite the fact that this type of error handling is not necessarily object-oriented in nature, I believe that it has a valid place in OO design. Throwing an exception (discussed in the next section) can be expensive in terms of overhead. Thus, although exceptions may be a valid design choice, you will still want to consider other error-handling techniques (even tried-and-true structured techniques), depending on your design and performance needs.
+
+Although the error checking techniques mentioned previously are preferable to doing nothing, they still have a few problems. It is not always easy to determine where a problem first appears. And it might take a while for the problem to be detected. However, it is important to design error handling into the class right from the start, and often the operating system itself can alert you to problems that it detects.
+
+### Throwing exceptions
+
+Most OO languages provide a feature called exceptions. In the most basic sense, exceptions are unexpected events that occur within a system. Exceptions provide a way to detect problems and then handle them. In Java, C#, C++, Swift, Typescript, and Visual Basic, exceptions are handled by the keywords `catch` and `throw`. This might sound like a baseball game, but the key concept here is that a specific block of code is written to handle a specific exception. This solves the problem of trying to figure out where the problem started and unwinding the code to the proper point. Here is the structure for a Java try/catch block:
+
+```java
+try {
+
+} catch (Exception e) {
+    // handle exception here
+}
+```
+
+If an exception is thrown within the `try` block, the `catch` block will handle it. When an exception is thrown while the block is executing, the following occurs:
+
+1. The execution of the try block is terminated.
+2. The `catch` clauses are checked to determine whether an appropriate catch block for the offending exception was included. (There might be more than `one` catch clause
+per `try` block. This is in java, it does not work that way in Typescript or Javascript)
+3. If none of the catch clauses handles the offending exception, it is passed to the next higher-level try block. (If the exception is not caught in the code, the system ultimately catches it, and the results are unpredictable—that is, an application crash.)
+4. If a catch clause is matched (the first match encountered), the statements in the `catch` clause are executed.
+5. Execution then resumes with the statement following the try/catch block.
+
+Suffice it to say that exceptions are an important advantage for OO programming languages. Here is an example of how an exception is caught in Java:
+
+```java
+import java.util.Scanner;
+
+public class ErrorHandling {
+
+    double count = 0;
+
+    public static void main(String[] args) {
+        ErrorHandling errorHandling = new ErrorHandling();
+        errorHandling.tryCatchBlock();
+    }
+
+    void tryCatchBlock() {
+        try {
+            // possible nasty code
+            count = 5 / 0;
+            System.out.println(count); // This won't run because the line above will trow an error
+        } catch (ArithmeticException e) {
+            // code to handle the exception
+            System.out.println("Error happened");
+            System.out.println(e.getMessage());
+            count = 1;
+        }
+        System.out.println("The exception is handled. And now count is: " + count); // count =1
+    }
+
+}
+```
+
+> **Exception Granularity:** You can catch exceptions at various levels of granularity. You can catch all exceptions or check for specific exceptions, such as arithmetic exceptions. If your code does not catch an exception, the Java runtime will—and it won't be happy about it!
+
+In this example, the division by zero within the try block will cause an arithmetic exception. If the exception was generated (thrown) outside a try block, the program would most likely have been terminated (crashed). However, because the exception was thrown within a try block, the catch block is checked to see whether the specific exception (in this case, an arithmetic exception, we could have handled it with a general exception with `catch (Exception e)`, which will catch all exceptions) was planned for. Because the catch block contains a check for the arithmetic exception, the code within the catch block is executed, thus setting count to 1. After the catch block executes, the try/catch block is exited, and the message The exception is handled. appears on the Java console.
+
+If you had not put `ArithmeticException` in the catch block, the program would likely have crashed. You can catch all exceptions by using `Exception`, check the following code:
+
+```java
+try {
+
+} catch (Exception e) {
+    // handle exception here
+}
+```
+
+> **Bulletproof Code:** It's a good idea to use a combination of the methods described here to make your program as bulletproof to your user as possible.
+
+## The importance of scope
+
+Multiple objects can be instantiated from a single class. Each of these objects has a unique identity and state. This is an important point. Each object is constructed separately and is allocated its own separate memory. However, some attributes and methods may, if properly declared, be shared by all the objects instantiated from the same class, thus sharing the memory allocated for these class attributes and methods.
+
+> A **Shared Method:** A constructor is a good example of a method that is shared by all instances of a class.
+
+
