@@ -481,7 +481,7 @@ public class Number {
 }
 ```
 
-By declaring `count` as `static`, this attribute is allocated a single piece of memory for all objects instantiated from the class. Thus, all objects of the class use the same memory location for `count`. Essentially, each class has a single copy, which is shared by all objects of that class. This is about as close to global data as we get in OO design. Also you can use the `static` keyword for creating only one method and sharing it across all instantiated objects of a class:
+By declaring `count` as `static`, this attribute is allocated a single piece of memory for all objects instantiated from the class. Thus, all objects of the class use the same memory location for `count`. Essentially, each class has a single copy, which is shared by all objects of that class. This is about as close to global data as we get in OO design. Also you can use the `static` keyword for creating a method and sharing it across all instantiated objects of a class:
 
 ```java
 public class Number {
@@ -508,3 +508,5 @@ Count Count2 = new Count();
 ```
 
 For the sake of argument, let’s say that the object `Count1` is going merrily about its way and is using count as a means of keeping track of the pixels on a computer screen. This is not a problem until the object `Count2` decides to use attribute `count` to keep track of sheep. The instant that `Count2` records its first sheep, the data that `Count1.count` was saving is lost. In practice, there might not be a lot of uses for static methods. Make sure you are confident in their use before incorporating them in designs.
+
+> **Difference between static and abstract keywords:** Static is initialized once, for example our attribute or method can be initialized only once when we use the static keyword. But an abstract class is a class which can have one or more than one abstract methods. Abstract methods are those which don't have implementation/body rather only has its declaration, so it is left to the class that extends it to provide implementation.
