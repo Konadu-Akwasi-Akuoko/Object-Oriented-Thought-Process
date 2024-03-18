@@ -1,11 +1,16 @@
-class Cabbie {
+class Cabbie1 {
   name: string;
   constructor() {
     this.name = "";
   }
 }
 
-let cabbie: Cabbie = new Cabbie();
+class Cabbie2 {
+  name: string = "";
+  constructor() {}
+}
+
+let cabbie: Cabbie1 = new Cabbie1();
 
 console.log(cabbie.name);
 

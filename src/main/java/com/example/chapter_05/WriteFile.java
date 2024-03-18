@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-public class Main {
+public class WriteFile {
 
     public static void main(String[] args) throws IOException {
         Writer writeFile = new FileWriter("log.txt");
