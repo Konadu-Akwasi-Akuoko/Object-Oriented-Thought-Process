@@ -121,3 +121,5 @@ We can safely say that almost no class lives in isolation. In most cases, there 
 In the cabbie example, the cabbie and the supervisor are not standalone entities; they interact with each other at various levels. When designing a class, make sure you are aware of how other objects will interact with it.
 
 ## Designing with reuse in mind
+
+Objects can be reused in different systems, and code should be written with reuse in mind. For example, when a Cabbie class is developed and tested, it can be used anywhere you need a cabbie. To make a class usable in various systems, the class must be designed with reuse in mind. This is where much of the thought is required in the design process. Attempting to predict all the possible scenarios in which a Cabbie object must operate is not a trivial task—in fact, it is virtually impossible.
