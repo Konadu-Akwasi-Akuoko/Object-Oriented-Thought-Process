@@ -205,3 +205,45 @@ public static String getCompanyName() {
 > **Static Attributes:** If an attribute is static, and the class provides a setter for that attribute, any object that invokes the setter will change the single copy. Thus, the value for the attribute will change for all objects.
 
 Notice that the `getCompanyName` method is declared as static, as a class method. Remember that the attribute companyName is also declared as static. A method, like an attribute, can be declared static to indicate that there is only one copy of the method for the entire class.
+
+## Public interface methods
+
+Both the constructors and the accessor methods are declared as public and are part of the public interface. They are singled out because of their specific importance to the construction of the class. However, much of the real work is provided in other methods. As mentioned in, the public interface methods tend to be very abstract, and the implementation tends to be more concrete. For this class, we provide a method called `giveDestination` that is the public interface for the user to describe where she wants to go:
+
+```java
+// ! Public interface
+public void giveDestination() {
+    
+}
+```
+
+What is inside this method is not important at this time. The main point is that this is a public method, and it is part of the public interface to the class.
+
+## Private implementation methods
+
+Although all the methods discussed so far in this chapter are defined as public, not all the methods in a class are part of the public interface. It is common for methods in a class to be hidden from other classes. These methods are declared as `private`:
+
+```java
+// ! Private implementations
+private void turnRight() {
+
+}
+
+private void turnLeft() {
+
+}
+```
+
+These private methods are meant to be part of the implementation and not the public interface. You might ask who invokes these methods, if no other class can. The answer is simple: You might have already surmised that these methods are called internally from the class itself. For example, these methods could be called from within the method `giveDestination`:
+
+```java
+// ! Public interface
+public void giveDestination() {
+    turnRight();
+    turnLeft();
+}
+```
+
+As another example, you may have an internal method that provides encryption that you will use only from within the class itself. In short, this encryption method can’t be called from outside the instantiated object itself.
+
+The point here is that private methods are strictly part of the implementation of the class and are not accessible by other classes.

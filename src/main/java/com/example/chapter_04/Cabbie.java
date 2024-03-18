@@ -45,7 +45,8 @@ public class Cabbie {
 
     // ! Public interface
     public void giveDestination() {
-
+        turnRight();
+        turnLeft();
     }
 
     // ! Private implementations
