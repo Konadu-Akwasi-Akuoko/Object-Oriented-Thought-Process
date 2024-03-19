@@ -282,4 +282,57 @@ For example, if a change were made to the `getName()` method of the `Cabbie` cla
 
 As in most design and programming functions, using an iterative process is recommended. This dovetails well with the concept of providing minimal interfaces. Basically, this means don’t write all the code at once! Create the code in small increments and then build and test it at each step. A good testing plan quickly uncovers any areas where insufficient interfaces are provided. In this way, the process can iterate until the class has the appropriate interfaces. This testing process is not simply confined to coding. Testing the design with walkthroughs and other design review techniques is very helpful. Testers’ lives are more pleasant when iterative processes are used, because they are involved in the process early and are not simply handed a system that is thrown over the wall at the end of the development process.
 
+## Testing the interface
+
+The minimal implementations of the interface are often called stubs. By using stubs, you can test the interfaces without writing any real code. In the following example, rather than connecting to an actual database, stubs are used to verify that the interfaces are working properly (from the user’s perspective—remember that interfaces are meant for the user). Thus, the implementation is not necessary at this point. In fact, it might cost valuable time and energy to complete the implementation yet because the design of the interface will affect the implementation, and the interface is not yet complete.
+
+Note that in the below example when a user class sends a message to the `DatabaseReader` class, the information returned to the user class is provided by code stubs and not by the actual database. (In fact, the database most likely does not exist yet.) When the interface is complete and the implementation is under development, the database can then be connected and the stubs disconnected. Here is a code example that uses an internal array to simulate a working database (albeit a
+simple one):
+
+```java
+public class DatabaseReader {
+
+    private String[] db = { "Record1", "Record2", "Record3", "Record4", "Record5" };
+    private boolean DBOpen = false;
+    private int pos;
+
+    public void open(String name) {
+        DBOpen = true;
+    }
+
+    public void close() {
+        DBOpen = false;
+    }
+
+    public void goToFirst() {
+        pos = 0;
+    }
+
+    public void goToLast() {
+        pos = 4;
+    }
+
+    public int howManyRecords() {
+        int numOfRecords = 5;
+        return numOfRecords;
+    }
+
+    public String getRecord(int key) {
+        /* DB Specific Implementation */
+        return db[key];
+    }
+
+    public String getNextRecord() {
+        /* DB Specific Implementation */
+        return db[pos++];
+    }
+}
+```
+
+Notice how the methods simulate the database calls. The strings within the array represent the records that will be written to the database. When the database is successfully integrated into the system, it will be substituted for the array.
+
+> **Keeping the Stubs Around:** When you are done with the stubs, don't delete them. Keep them in the code for possible use later—just make sure the users can't see them and the other team members know that they are there. In fact, in a well-designed program, your test stubs should be integrated into the design and kept in the program for later use. In short, design the testing right into the class! Perhaps even better, create stubs with mock data and coded to interfaces, and then you can swap them out with the actual implementation when the time comes.
+
+As you find problems with the interface design, make changes and repeat the process until you are satisfied with the result.
+
 
