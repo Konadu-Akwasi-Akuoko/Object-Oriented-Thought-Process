@@ -222,4 +222,46 @@ public class Main {
 
 It is important to understand how objects are copied and compared. You might not want, or expect, a simple bitwise copy or compare operation. You must make sure that your class behaves as expected, and this means you have to spend some time designing how objects are copied and compared.
 
+### Keeping the scope as small as possible
 
+Keeping the scope as small as possible goes hand-in-hand with abstraction and hiding the implementation. The idea is to localize attributes and behaviors as much as possible. In this way, maintaining, testing, and extending a class are much easier. Using interfaces is a great way to enforce this.
+
+> **Scope and Global Data:** Minimizing the scope of global variables is a good programming style and is not specific to OO programming. Global variables are allowed in structured development, yet they can get dicey. In fact, there is no global data in OO development. Static attributes and methods are shared among objects of the same class; however, they are not available to objects not of the class. You could also share data via a file or database.
+
+For example, if you have a method that requires a temporary attribute, keep it local. Consider the following code:
+
+```java
+public class Math {
+
+    int temp = 0;
+
+    public int swap(int a, int b) {
+        temp = a;
+        a = b;
+        b = temp;
+
+        return temp;
+    }
+
+}
+```
+
+The problem is that the attribute `temp` is needed only within the scope of the `swap()` method. There is no reason for it to be at the class level. Thus, you should move `temp` within the scope of the `swap()` method:
+
+```java
+public class Math {
+
+    public int swap(int a, int b) {
+        int temp = 0;
+
+        temp = a;
+        a = b;
+        b = temp;
+
+        return temp;
+    }
+
+}
+```
+
+This is what is meant by keeping the scope as small as possible. The `temp` attribute is now local to the `swap()` method and is not available to any other method in the class. This is a good thing. It is not a good idea to have attributes that are available to all methods in a class if they are not needed by all methods.
