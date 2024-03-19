@@ -335,4 +335,22 @@ Notice how the methods simulate the database calls. The strings within the array
 
 As you find problems with the interface design, make changes and repeat the process until you are satisfied with the result.
 
+## Using Object Persistence
 
+Object persistence is another issue that must be addressed in many OO systems. Persistence is the concept of maintaining the state of an object. When you run a program, if you don’t save the object in some manner, the object dies, never to be recovered. These transient objects might work in some applications, but in most business systems, the state of the object must be saved for later use.
+
+In its simplest form, an object can persist by being serialized and written to a flat file. The state-of-the-art technology is now XML-based. Although it is true that an object theoretically can persist in memory as long as it is not destroyed, we will concentrate on storing persistent objects on some sort of storage device. There are three primary storage devices to consider:
+
+- **Flat file system:** You can store an object in a flat file by serializing the object. This is definitely outdated. More often than not, objects are serialized to XML and/or JSON and written to some sort of file system or data store or web endpoint. They can be put into a database or written to disk, which is the most common practice nowadays.
+- **Relational database:** Some sort of middleware is necessary to convert an object to a relational model.
+- **NoSQL database:** This may be a more efficient way to make objects persistent, but most companies have all their data in legacy systems and at this point in time are unlikely to convert their relational databases to OO databases. This is the most common form of a flexible structure database. MongoDB, DynamoDb, or Cosmos DB are three of the bigger names in this space.
+
+### Serializing and marshalling objects
+
+We have already discussed the problem of using objects in environments that were originally designed for structured programming. The middleware example, where we wrote objects to a relational database, is one good example. We also touched on the problem of writing an object to a flat file or sending it over a network.
+
+To send an object over a wire (for example, to a file, over a network), the system must deconstruct the object (flatten it out), send it over the wire, and then reconstruct it on the other end of the wire. This process is called serializing an object. The act of sending the object across a wire is called marshaling an object. A serialized object, in theory, can be written to a flat file and retrieved later, in the same state in which it was written.
+
+The major issue here is that the serialization and deserialization must use the same specifications. It is sort of like an encryption algorithm. If one object encrypts a string, the object that wants to decrypt it must use the same encryption algorithm. Java provides an interface called `Serializable` that provides this translation.
+
+This is another reason why data is separated from behaviors nowadays. It’s far simpler to create an interface for a data contract and push that out to a web service than it is to make sure people have the same code on both sides.
