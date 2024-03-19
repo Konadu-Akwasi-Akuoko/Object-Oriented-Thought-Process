@@ -145,3 +145,81 @@ Earlier we discussed the use of proper documentation and comments. Following a n
 If you are designing a system that must use non-portable (native) code (that is, the code will run only on a specific hardware platform), you should abstract this code out of the class. By abstracting out, we mean isolating the non-portable code in its own class or at least its own method (a method that can be overridden). For example, if you are writing code to access a serial port of particular hardware, you should create a wrapper class to deal with it. Your class should then send a message to the wrapper class to get the information or services it needs. Do not put the system-dependent code into your primary class.
 
 For example, consider the situation when a programmer is interfacing directly with hardware. In these cases, the object code of the various platforms will most likely be quite different, and thus code must be written for each platform. However, if the functionality is placed in a wrapper class, then a user of the class can interface directly with the wrapper and not have to worry about the various low-level code. The wrapper class will deal with the differences in these platforms and decide which code to invoke.
+
+Here is an example of a class that uses a wrapper class to deal with the differences in platforms:
+
+- Create an interface that defines the behavior of the class.
+IDrawOnSpecificDevice.java:
+
+```java
+public interface IDrawOnSpecificDevice {
+
+    void drawOnSpecificDevice();
+
+}
+```
+
+- Create a class that uses the interface to draw on specific devices.
+DrawOnSpecificDevice.java:
+
+```java
+public class DrawOnSpecificDevices implements IDrawOnSpecificDevice {
+
+    public void drawOnSpecificDevice() {
+        if (System.getProperty("os.name").equals("Windows")) {
+            System.out.println("Drawing on Windows devices...");
+        } else if (System.getProperty("os.name").equals("Linux")) {
+            System.out.println("Drawing on Linux devices...");
+        } else if (System.getProperty("os.name").equals("Mac OS X")) {
+            System.out.println("Drawing on Mac OS X devices...");
+        }
+    }
+
+}
+```
+
+- Create a general class that uses dependency injection to draw on specific devices. So that the general class can draw on specific devices, but does not include platform-specific code.
+DrawOnGeneralDevices.java:
+
+```java
+public class DrawOnGeneralDevices implements IDrawOnSpecificDevice {
+
+    private final DrawOnSpecificDevices drawOnSpecificDevice;
+
+    public DrawOnGeneralDevices(DrawOnSpecificDevices drawOnSpecificDevice) {
+
+        this.drawOnSpecificDevice = drawOnSpecificDevice;
+
+    }
+
+    public void draw() {
+        System.out.println("Drawing on general devices...");
+    }
+
+    public void drawOnSpecificDevice() {
+        drawOnSpecificDevice.drawOnSpecificDevice();
+    }
+
+}
+```
+
+Main.java:
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        DrawOnGeneralDevices draw = new DrawOnGeneralDevices(new DrawOnSpecificDevices());
+
+        draw.draw();
+        draw.drawOnSpecificDevice();
+    }
+
+}
+```
+
+### Providing a way to copy and compare objects
+
+It is important to understand how objects are copied and compared. You might not want, or expect, a simple bitwise copy or compare operation. You must make sure that your class behaves as expected, and this means you have to spend some time designing how objects are copied and compared.
+
+
