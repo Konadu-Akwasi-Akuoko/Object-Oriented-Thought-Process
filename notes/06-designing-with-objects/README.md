@@ -223,3 +223,13 @@ public class TestBeep {
 ```
 
 Not only is this simpler for the programmer to use, but you can extend the functionality of the class to include other sounds. Perhaps more importantly, when the code is used on a non-Windows platform, the interface for the user remains the same. In short, the team that builds the code for the Sound class will have to deal with the change in platform. For the programmers who utilize the class in their applications, the change will be seamless because they will still call the beep method.
+
+### Wrapping existing classes
+
+Although the need to wrap legacy structured code, or even non-portable code, into a new (object-oriented) class may seem reasonable, the need to wrap existing classes might not seem so obvious. However, there are also many reasons to create wrappers for existing (object-oriented) classes.
+
+Software developers often utilize code written by someone else. Perhaps the code was purchased from a vendor or even written internally within the same organization. In many of these cases, the code cannot be changed. Perhaps the individual who wrote the code is no longer with the organization, or the vendor cannot perform maintenance updates, and so on. This is where the true power of wrappers emerges.
+
+The idea is to take an existing class and alter its implementation or interface by wrapping it inside a new class—just like we did for the structured code and non-portable code. The difference in this case is that, rather than putting an object-oriented face to the code, we are altering its implementation or interface.
+
+The use of wrappers in software development is fairly extensive, not only from a developer’s perspective but also from a vendor’s. Wrappers are an important tool when developing software systems.
