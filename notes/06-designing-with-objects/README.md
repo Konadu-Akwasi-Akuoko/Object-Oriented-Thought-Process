@@ -70,3 +70,9 @@ After the requirements are documented, the process of identifying classes can be
 ### Determining the responsibility of each class
 
 You need to determine the responsibilities of each class you have identified. This includes the data that the class must store and what operations the class must perform. For example, an Employee object would be responsible for calculating payroll and transferring the money to the appropriate account. It might also be responsible for storing the various payroll rates and the account numbers of various banks.
+
+### Determining how the classes collaborate with each other
+
+Most classes do not exist in isolation. Although a class must fulfill certain responsibilities, many times it will have to interact with another class to get something it wants. This is where the messages between classes apply. One class can send a message to another class when it needs information from that class, or if it wants the other class to do something for it.
+
+
