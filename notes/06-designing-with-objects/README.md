@@ -92,3 +92,60 @@ In my mind, there is no way to write a program without using structures. Thus, w
 For example, when you create a new object that contains attributes and methods, those methods will include structured code. In fact, I might even say that these methods will contain mostly structured code.
 
 ### Structured code
+
+Although the basics of programming logic may be debated, as I have stressed, the fundamental object-oriented constructs are encapsulation, inheritance, polymorphism, and composition. In most textbooks, the basic constructs of structured programming are sequence, conditions, and iterations. The sequence part is a given, because it seems logical to start at the top and proceed in a logical manner to the bottom. For me, the meat of structured programming resides in the conditions and iterations, which I call if-statements and loops, respectively.
+
+Take a look at the following Java code that starts at 0 and loops 10 times, printing out the value if it equals 5:
+
+```java
+public class MainApplication {
+    public static void main(String[] args) {
+        int x = 0;
+
+        while (x <= 10) {
+            if (x == 5)
+                System.out.println("x = " + x);
+            x++;
+        }
+    }
+}
+```
+
+Now while this code is written in an object-oriented language, the code that resides inside the main method is structured code. All three basics of structured programming are present: `sequence`, `conditions`, and `iterations`.
+
+The sequence part is easy to identify because the first line executed is
+
+```java
+int x = 0;
+```
+
+When that line completes, the next line is executed:
+
+```java
+while (x <= 10) {
+```
+
+And so on. In short, this is tried and true top-down programming: start at the first line, execute it, and then go on to the next.
+
+There is also a condition present in this code as part of the if-statement:
+
+```java
+if (x==5)
+```
+
+Finally, there is a loop to complete the structured trio:
+
+```java
+while (x <= 10) {
+}
+```
+
+Actually, the while loop also contains a condition:
+
+```java
+(x <= 10)
+```
+
+You can pretty much code anything with just these three constructs. In fact, the concept of the wrapper is basically the same for structured programming as it is for object-oriented programming. In structured design you wrap the code in functions (such as the main method in this example), and in object-oriented design you wrap the code in objects and methods.
+
+### Wrapping structured code
