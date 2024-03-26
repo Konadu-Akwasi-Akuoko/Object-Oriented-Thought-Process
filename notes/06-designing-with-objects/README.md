@@ -149,3 +149,46 @@ Actually, the while loop also contains a condition:
 You can pretty much code anything with just these three constructs. In fact, the concept of the wrapper is basically the same for structured programming as it is for object-oriented programming. In structured design you wrap the code in functions (such as the main method in this example), and in object-oriented design you wrap the code in objects and methods.
 
 ### Wrapping structured code
+
+Although defining attributes is considered coding (for example, creating an integer), the behavior of an object resides in the methods. And these methods are where the bulk of the code logic is found. An object contains methods, and these methods contain
+code, which can be anything from variable declarations to conditions to loops.
+
+Let’s consider a simple example in which we are wrapping the functionality for addition. Here we create a method named `add`, which accepts two integer parameters and returns their sum:
+
+```java
+public class SomeMath {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+```
+
+As you can see, the structured code used to perform the addition (a + b) is wrapped inside the add method. Although this is a trivial example, that is all there is to wrapping structured code. Thus, when the user wants to use this method, all that is needed is the signature of the method as seen next:
+
+```java
+public class TestMath {
+    public static void main(String[] args) {
+        int x = 0;
+
+        SomeMath math = new SomeMath();
+        x = math.add(1, 2);
+        System.out.println("x = " + x);
+    }
+}
+```
+
+Finally, we can add some more functionality that is a bit more interesting and complicated. Suppose that we wanted to include a method to calculate the Fibonacci value of a number. We can then add a method like this:
+
+```java
+public static int fib(int n) {
+    if (n < 2) {
+        return n;
+    } else {
+        return fib(n - 1) + fib(n - 2);
+    }
+}
+```
+
+The whole point here is to show that we have an object-oriented method that contains (wraps) structured code, because the fib method contains conditions, recursion, and so on. And as mentioned in the introduction, it is possible to incorporate existing legacy code in wrappers as well. (**NB: The code above does not work as expected,talking about the `fib` method. Will fix it later. If I don't fell free to fix it.**)
+
+### Wrapping non-portable code
