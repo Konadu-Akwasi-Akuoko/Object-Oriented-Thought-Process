@@ -75,4 +75,8 @@ You need to determine the responsibilities of each class you have identified. Th
 
 Most classes do not exist in isolation. Although a class must fulfill certain responsibilities, many times it will have to interact with another class to get something it wants. This is where the messages between classes apply. One class can send a message to another class when it needs information from that class, or if it wants the other class to do something for it.
 
+### Creating a class model to describe the system
+
+When all the classes are determined and the class responsibilities and collaborations are listed, a class model that represents the complete system can be constructed. The class model shows how the various classes interact within the system.
+
 
