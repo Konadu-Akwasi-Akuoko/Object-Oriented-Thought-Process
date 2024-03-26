@@ -192,3 +192,34 @@ public static int fib(int n) {
 The whole point here is to show that we have an object-oriented method that contains (wraps) structured code, because the fib method contains conditions, recursion, and so on. And as mentioned in the introduction, it is possible to incorporate existing legacy code in wrappers as well. (**NB: The code above does not work as expected,talking about the `fib` method. Will fix it later. If I don't fell free to fix it.**)
 
 ### Wrapping non-portable code
+
+One other use of object wrappers is for the hiding of non-portable (or native) code. The concept is essentially the same; however, in this case the point is to take code that can be executed on only one platform (or a few platforms) and encapsulate it in a method providing a simple interface for the programmers using the code.
+
+Consider the task of making the computer make a noise—in this case, a beep. On a Windows platform we can execute a beep with the following code:
+
+```java
+System.out.println("\007");
+```
+
+Rather than making the programmer memorize the code (or look it up), you can provide a class called `Sound` that contains a method called `beep` as shown next:
+
+```java
+class Sound {
+    public void beep() {
+        System.out.println("\007");
+    }
+}
+```
+
+Now, rather than having to know the code for making the sound, the programmer can use the class and call the `beep` method:
+
+```java
+public class TestBeep {
+    public static void main(String[] args) {
+        Sound mySound = new Sound();
+        mySound.beep();
+    }
+}
+```
+
+Not only is this simpler for the programmer to use, but you can extend the functionality of the class to include other sounds. Perhaps more importantly, when the code is used on a non-Windows platform, the interface for the user remains the same. In short, the team that builds the code for the Sound class will have to deal with the change in platform. For the programmers who utilize the class in their applications, the change will be seamless because they will still call the beep method.
