@@ -79,4 +79,16 @@ Most classes do not exist in isolation. Although a class must fulfill certain re
 
 When all the classes are determined and the class responsibilities and collaborations are listed, a class model that represents the complete system can be constructed. The class model shows how the various classes interact within the system.
 
+### Prototyping the user interface in code
 
+During the design process, we must create a prototype of our user interface. This prototype will provide invaluable information to help navigate through the iterations of the design process.
+
+There are several ways to create a user interface prototype. You can sketch the user interface by drawing it on paper or a whiteboard. You also can use a special prototyping tool (Figma), or even a language environment like Visual Basic, which is often used for rapid prototyping. Or you can use the IDE from your favorite development tool to create the prototype. However, at this point they are basically facades; the business logic is not necessarily in place. However you develop the user interface prototype, make sure that the users have the final say on the look and feel.
+
+## Object wrappers
+
+In my mind, there is no way to write a program without using structures. Thus, when you write a program that uses an object-oriented programming language and are using sound object-oriented design techniques, you are also using structured programming techniques. There is no way around this.
+
+For example, when you create a new object that contains attributes and methods, those methods will include structured code. In fact, I might even say that these methods will contain mostly structured code.
+
+### Structured code
