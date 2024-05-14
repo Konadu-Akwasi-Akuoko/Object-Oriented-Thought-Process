@@ -1,0 +1,31 @@
+@startuml Dog
+class Dog {
+    -pantRate : int
+    +pant() : void
+}
+
+class BarkingDog extends Dog {
+    -barkFrequency : int
+    +bark() : void
+}
+
+class YodelingDog extends Dog {
+    -yodelFrequency : int
+    +yodels() : void
+}
+
+class Rottweiler extends BarkingDog {
+    -guardEfficiency : int
+    +guards() : void
+}
+
+class GoldenRetriever extends YodelingDog {
+    -retrievalSpeed : int
+    +retrieves() : void
+}
+
+class Basenji extends YodelingDog {
+    -huntEfficiency: int
+    +hunts():void
+}
+@enduml
