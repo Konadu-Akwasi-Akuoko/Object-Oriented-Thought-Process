@@ -10,5 +10,6 @@ public class GoldenRetriever extends Dog {
 
     public void retrieve() {
         System.out.println("Retrieving!");
+        bark();
     }
 }

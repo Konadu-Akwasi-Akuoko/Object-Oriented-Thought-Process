@@ -1,0 +1,15 @@
+@startuml CarComposition
+class Car {
+}
+
+class SteeringWheel {
+    +steer()
+}
+
+class Stereo {
+    +playMusic()
+}
+
+Car *-- SteeringWheel
+Car *-- Stereo
+@enduml

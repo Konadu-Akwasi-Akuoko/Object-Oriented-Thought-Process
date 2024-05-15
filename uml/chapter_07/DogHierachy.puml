@@ -19,7 +19,7 @@ class Rottweiler extends BarkingDog {
     +guards() : void
 }
 
-class GoldenRetriever extends YodelingDog {
+class GoldenRetriever extends BarkingDog {
     -retrievalSpeed : int
     +retrieves() : void
 }
