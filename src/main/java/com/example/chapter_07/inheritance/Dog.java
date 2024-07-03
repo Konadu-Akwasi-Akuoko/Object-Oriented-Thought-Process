@@ -5,7 +5,7 @@ public class Dog {
     public int barkFrequency;
     public int pantRate;
 
-    public void Dog() {
+    public Dog() {
         barkFrequency = 0;
         pantRate = 0;
     }
@@ -16,6 +16,10 @@ public class Dog {
 
     public void pant() {
         System.out.println("Pant!");
+    }
+
+    private void swim() {
+        System.out.println("swim");
     }
 
 }

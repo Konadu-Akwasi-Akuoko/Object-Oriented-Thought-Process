@@ -16,7 +16,7 @@ The compiler will recognize that the method name is identical to the class name 
 
 > **Caution:** Note that in this Java code (as with C# and C++), a constructor does not have a return value. If you provide a return value, the compiler will not treat the method as a constructor. Whiles typescript let's you return a value in it's constructor, it is something [that should be avoided](https://stackoverflow.com/questions/70926908/make-constructor-return-subclass#:~:text=TypeScript%20does%20let%20you%20return,it%2C%20yes%20this%20is%20possible.&text=So%20that%20works%20exactly%20was%20you%20want.).
 
-For example, if you include the following code in the class, the compiler will not consider this a constructor because it has a return value—in this case an integer.
+For example, if you include the following code ****in the class, the compiler will not consider this a constructor because it has a return value—in this case an integer.
 
 ```java
 public class Cabbie {
