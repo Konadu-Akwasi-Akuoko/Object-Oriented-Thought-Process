@@ -1,0 +1,52 @@
+@startuml EmployeeCardinality
+class Person {
+  - Name: String
+  - SSNum: String
+  - Age: int
+  + getName(): String
+  + getSSNum(): String
+  + getAge(): int
+  + setName(name: String): void
+  + setSSNum(ssnum: String): void
+  + setAge(age: int): void
+}
+
+class Employee {
+  - Title: String
+  - HireDate: Date
+  + getTitle(): String
+  + getHireDate(): Date
+  + setTitle(title: String): void
+  + setHireDate(hiredate: Date): void
+}
+
+class AnniversaryData {
+  - SpecialDay: Date
+  + getAnniversaryDate(): Date
+  + setAnniversaryDate(anniversarydate: Date): void
+}
+
+class FavoriteToy {
+  - ToyName: String
+  + getFavoriteToy(): String
+  + setFavoriteToy(toyname: String): void
+}
+
+class DivisionName {
+  - DivisionName: String
+  + getDivisionName(): String
+  + setDivisionName(divisionname: String): void
+}
+
+class JobDescription {
+  - Description: String
+  + getDescription(): String
+  + setDescription(description: String): void
+}
+
+Person <|-- Employee
+Employee "0..1" --> AnniversaryData
+Employee "0..n" --> FavoriteToy
+Employee "1" --> DivisionName
+DivisionName "1..n" --> JobDescription
+@enduml
