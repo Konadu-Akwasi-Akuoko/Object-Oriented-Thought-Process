@@ -15,3 +15,25 @@ The reason to use composition is that it builds systems by combining less comple
 Composition also helps in other ways, such as making parts interchangeable. If all steering wheels are the same, it does not matter which specific steering wheel is installed in a specific car. In software development, interchangeable parts mean **reuse**.
 
 ## Building In Phases
+
+Another major advantage in using composition is that systems and subsystems can be built independently, and perhaps more importantly, tested and maintained independently.
+
+To build quality software, you must follow one overriding rule to be successful: Keep things as simple as possible. For large software systems to work properly and be easily maintained, they must be broken into smaller, more manageable parts.
+
+**The architecture of complexity, by Nobel Prize winner Herbert Simon, states that:**
+
+1. Stable complex systems usually take the form of a hierarchy, where each system is built from simpler subsystems, and each subsystem is built from simpler subsystems still.
+2. Stable, complex systems are nearly decomposable. Meaning you can identify the parts that make up the system and can tell the difference between interactions between the parts and inside the parts.
+3. Stable complex systems are almost always composed of only a few different kinds of subsystems, arranged in different combinations.
+4. Stable systems that work have almost always evolved from simple systems
+   that worked.
+
+The above is 4 rules of building complex systems, and composition is just these 4 rules. Here is an analogy.
+
+Let's say we have a stereo system. Suppose the stereo system was totally integrated and was not built from components (that is, the stereo system was one big black-box system). In this case, what would happen if the CD player broke and became unusable? You would have to take in the entire system for repair, or if not reparable throw it away. Not only would this be more complicated and expensive, but you would not have the use of any of the other components.
+
+Suppose the system is broken into components rather than a single unit and connected together with wires. In this case, if the CD player broke, you could disconnect the CD player and take it in for repair. (Note that all the components are connected by wires, it's just a matter of connecting and disconnecting).
+
+The above illustration shows clearly that composition is one of the primary strategies that you, as a software designer, have in your arsenal to fight software complexity.
+
+## Types Of Composition
