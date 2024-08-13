@@ -1,0 +1,41 @@
+@startuml CarAssociation
+class Car {
+}
+
+class Engine {
+}
+
+class Stereo {
+}
+
+class Door {
+}
+
+class Pistons {
+}
+
+class SparkPlugs {
+}
+
+class Radio {
+}
+
+class Cassette {
+}
+
+class Handle {
+}
+
+class Tuner {
+}
+
+Car --> Engine
+Car --> Stereo
+Car --> Door
+Engine --> Pistons
+Engine --> SparkPlugs
+Stereo --> Radio
+Stereo --> Cassette
+Door --> Handle
+Radio --> Tuner
+@enduml
