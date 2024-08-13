@@ -241,4 +241,66 @@ private JobDescription[] jobDescriptions;
 
 One of the most important issues when dealing with associations is to make sure that your application is designed to check for optional associations. This means that your code must check to see whether the association is null. Suppose in the previous example that your code assumes that every employee has a spouse. However, if one employee is not married, the code will have a problem (see Figure 9.8). If your code does indeed expect a spouse to exist, it may well fail and leave the system in an unstable state. The bottom line is that the code must check for a `null` condition, and must handle this as a valid condition.
 
-For example, if no spouse exists, the code must not attempt to invoke a spouse behavior. This could lead to an application failure. Thus, the code must be able to process an `Employee` object that has no spouse. 
+For example, if no spouse exists, the code must not attempt to invoke a spouse behavior. This could lead to an application failure. Thus, the code must be able to process an `Employee` object that has no spouse.
+
+## Tying It All Together: An Example
+
+Let’s work on a simple example that will tie the concepts of inheritance, interfaces, composition, associations, and aggregations together into a single, short system diagram.
+
+![TyingItAllTogether.png](../../uml/chater_09/TyingItAllTogether.png)
+
+1. **Interfaces**
+  - **Nameable**
+    - Methods: `+ getName(): String`, `+ setName(name: String): void`
+    - Represents a contract that any implementing class must fulfill.
+
+2. **Classes**
+  - **Mammal**
+    - Method: `+ getType(): String`
+    - Represents a general category of mammals.
+  - **Dog**
+    - Inherits from `Mammal` and implements `Nameable`
+    - Attributes: `- name: String`
+    - Methods: `+ getName(): String`, `+ setName(name: String): void`, `+ goForWalk(): void`
+  - **Head**
+    - Attribute: `- size: String`
+    - Method: `+ getSize(): String`
+  - **Owner**
+    - Attribute: `- name: String`
+    - Methods: `+ getName(): String`, `+ walkDog(): void`
+
+3. **Inheritance**
+  - **Dog extends Mammal**
+    - `Dog` inherits from `Mammal`, meaning `Dog` is a specialized type of `Mammal`.
+    - Inheritance is depicted using a solid line with a hollow triangle pointing towards the superclass (`Mammal`).
+
+4. **Interface Implementation**
+  - **Dog implements Nameable**
+    - `Dog` class implements the `Nameable` interface, meaning it must provide implementations for `getName` and `setName` methods.
+    - Implementation is depicted using a dashed line with a hollow triangle pointing towards the interface (`Nameable`).
+
+5. **Composition**
+  - **Dog *-- "1" Head**
+    - Composition relationship between `Dog` and `Head`.
+    - Indicates that a `Dog` is composed of one `Head`.
+    - Composition is depicted using a solid diamond at the `Dog` end.
+
+6. **Association**
+  - **Dog *--> "1..*" Owner**
+    - Association relationship between `Dog` and `Owner`.
+    - Indicates that a `Dog` can have one or more `Owners`.
+    - Association is depicted using a solid line with multiplicity notation.
+
+#### Cardinality
+
+1. **Dog and Head**
+  - **1**
+    - A `Dog` can have only one `Head`.
+    - This is a mandatory relationship, meaning every `Dog` must have exactly one `Head`.
+
+2. **Dog and Owner**
+  - **1..***
+    - A `Dog` can have one or more `Owners`.
+    - This indicates that a `Dog` must have at least one `Owner`, but can have multiple (e.g., a wife and husband).
+
+These relationships—inheritance, interfaces, composition, and associations—are fundamental to designing object-oriented systems. They help in structuring the system in a way that is modular, reusable, and easy to understand. 
