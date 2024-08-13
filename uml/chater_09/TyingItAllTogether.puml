@@ -1,0 +1,31 @@
+@startuml TyingItAllTogether
+interface Nameable {
+  + getName(): String
+  + setName(name: String): void
+}
+
+class Mammal {
+  + getType(): String
+}
+
+class Dog extends Mammal implements Nameable {
+  - name: String
+  + getName(): String
+  + setName(name: String): void
+  + goForWalk(): void
+}
+
+class Head {
+  - size: String
+  + getSize(): String
+}
+
+class Owner {
+  - name: String
+  + getName(): String
+  + walkDog(): void
+}
+
+Dog *-- "1" Head
+Dog *--> "1..*" Owner
+@enduml
