@@ -1,7 +1,9 @@
 # Building Objects and Object-Oriented Design
 
+## Table of Content
 <!-- TOC -->
 * [Building Objects and Object-Oriented Design](#building-objects-and-object-oriented-design)
+  * [Table of Content](#table-of-content)
   * [Composition Relationships](#composition-relationships)
   * [Building In Phases](#building-in-phases)
   * [Types Of Composition](#types-of-composition)
@@ -19,6 +21,8 @@
       * [Inheritance](#inheritance)
       * [Composition Cardinality](#composition-cardinality)
     * [Multiple Object Associations](#multiple-object-associations)
+    * [Optional Associations](#optional-associations)
+  * [Tying It All Together: An Example](#tying-it-all-together-an-example)
 <!-- TOC -->
 
 There is a major difference between inheritance and composition. Although they allow us to have a relationship between a child and a parent, the two are inherently not the same.
@@ -253,7 +257,6 @@ Let’s work on a simple example that will tie the concepts of inheritance, inte
   - **Nameable**
     - Methods: `+ getName(): String`, `+ setName(name: String): void`
     - Represents a contract that any implementing class must fulfill.
-
 2. **Classes**
   - **Mammal**
     - Method: `+ getType(): String`
@@ -268,37 +271,29 @@ Let’s work on a simple example that will tie the concepts of inheritance, inte
   - **Owner**
     - Attribute: `- name: String`
     - Methods: `+ getName(): String`, `+ walkDog(): void`
-
 3. **Inheritance**
   - **Dog extends Mammal**
     - `Dog` inherits from `Mammal`, meaning `Dog` is a specialized type of `Mammal`.
     - Inheritance is depicted using a solid line with a hollow triangle pointing towards the superclass (`Mammal`).
-
 4. **Interface Implementation**
   - **Dog implements Nameable**
     - `Dog` class implements the `Nameable` interface, meaning it must provide implementations for `getName` and `setName` methods.
     - Implementation is depicted using a dashed line with a hollow triangle pointing towards the interface (`Nameable`).
-
 5. **Composition**
   - **Dog *-- "1" Head**
     - Composition relationship between `Dog` and `Head`.
     - Indicates that a `Dog` is composed of one `Head`.
     - Composition is depicted using a solid diamond at the `Dog` end.
-
 6. **Association**
   - **Dog *--> "1..*" Owner**
     - Association relationship between `Dog` and `Owner`.
     - Indicates that a `Dog` can have one or more `Owners`.
     - Association is depicted using a solid line with multiplicity notation.
-
-#### Cardinality
-
-1. **Dog and Head**
+7. **Dog and Head**
   - **1**
     - A `Dog` can have only one `Head`.
     - This is a mandatory relationship, meaning every `Dog` must have exactly one `Head`.
-
-2. **Dog and Owner**
+8. **Dog and Owner**
   - **1..***
     - A `Dog` can have one or more `Owners`.
     - This indicates that a `Dog` must have at least one `Owner`, but can have multiple (e.g., a wife and husband).
