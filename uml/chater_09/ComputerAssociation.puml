@@ -1,0 +1,25 @@
+@startuml
+class ComputerSystem {
+}
+
+class Monitor {
+}
+
+class Keyboard {
+}
+
+class Mouse {
+}
+
+class SystemUnit {
+}
+
+ComputerSystem *-- Monitor
+ComputerSystem *-- Keyboard
+ComputerSystem *-- Mouse
+ComputerSystem *-- SystemUnit
+
+SystemUnit --> Keyboard : uses
+SystemUnit --> Mouse : uses
+SystemUnit --> Monitor : uses
+@enduml
