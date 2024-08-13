@@ -48,5 +48,25 @@ Aggregation means that a complex object is composed of other objects.
 
 Let's see an analogy, when you go to buy a car, you do not pick and choose all the individual components of the car. You do not decide which spark plugs to buy or which door handles to buy. You go to buy a car. You choose the car as a whole, a complex object made up of many other complex and simple objects.
 
-![CarAssociation.png](../../uml/chater_09/CarAssociation.png)
+![CarAssociation.png](../../uml/chater_09/CarAggregation.png)
+
+### Association
+
+Whereas aggregations represent relationships where you normally see only the whole, associations present both the whole and the parts.
+
+As stated in the stereo example above, the various components are presented separately and connect to the whole by use of patch cords (the cords that connect the various components).
+
+Consider a traditional desktop computer system as an example; the whole is the computer system. The components are the monitor, keyboard, mouse, and the system unit. Each is a separate object, but together they represent the whole of the computer system. The main computer system is using the keyboard, the mouse, and the monitor to delegate some of the work. In other words, the system unit needs the service of a mouse but does not have the capability to provide this service by itself. Thus, the system unit requests the service from a separate mouse via the specific port and cable connecting the mouse to the system unit.
+
+![ComputerAssociation.png](../../uml/chater_09/ComputerAssociation.png)
+
+> **Aggregation vs Association:** An aggregation is a complex object composed of other objects. An association is used when one object wants another object to perform a service for it.
+
+### Using Associations and Aggregations Together
+
+One thing you might have noticed in all the examples is that the dividing lines between what is an association and what is an aggregation are often blurred. Suffice it to say that many of your most interesting design decisions both use aggregation and association.
+
+For example, the desktop computer system example used to describe associations also contains some aggregation. Although the interaction between the system unit, the monitor, the keyboard, and the mouse is association, the system unit itself represents aggregation. You see only the system unit, but it is actually a complex system made up of other objects, including chips, motherboards, video cards, and so on.
+
+## Avoiding Dependencies
 
