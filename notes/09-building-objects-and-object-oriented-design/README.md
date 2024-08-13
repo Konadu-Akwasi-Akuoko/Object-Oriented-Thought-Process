@@ -42,4 +42,11 @@ Generally, there are two types of composition: association and aggregation. In b
 
 All forms of composition include a has-a relationship. However, subtle differences exist between associations and aggregations based on how you visualize the parts of the whole. In an aggregation, you normally see only the whole, and in associations, you normally see the parts that make up the whole.
 
-### Aggregations
+### Aggregation
+
+Aggregation means that a complex object is composed of other objects. 
+
+Let's see an analogy, when you go to buy a car, you do not pick and choose all the individual components of the car. You do not decide which spark plugs to buy or which door handles to buy. You go to buy a car. You choose the car as a whole, a complex object made up of many other complex and simple objects.
+
+![CarAssociation.png](../../uml/chater_09/CarAssociation.png)
+
