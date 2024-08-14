@@ -93,4 +93,18 @@ If you follow the MVC (Model-View-Controller) concept and separate the user inte
 
 This approach assumes that the interfaces between the UI, business logic, and data do not change (very important).
 
+## Types Of Design Patterns
 
+Design patterns are grouped into 3 types:
+
+1. **Creational Patterns**
+    - Create objects for you, rather than having you instantiate objects directly.
+    - Provides more flexibility in deciding which objects need to be created for a given case.
+
+2. **Structural Patterns**
+    - Help you compose groups of objects into larger structures.
+    - Examples include complex user interfaces or accounting data.
+
+3. **Behavioral Patterns**
+    - Define the communication between objects in your system.
+    - Control the flow in a complex program.
