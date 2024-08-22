@@ -108,3 +108,15 @@ Design patterns are grouped into 3 types:
 3. **Behavioral Patterns**
     - Define the communication between objects in your system.
     - Control the flow in a complex program.
+
+### Creational Patterns
+
+The creational patterns consist of the following categories:
+
+- Abstract factory
+- Builder
+- Factory method
+- Prototype
+- Singleton
+
+#### Abstract Factory
